@@ -581,7 +581,7 @@ body {
       }).join("");
   }
   var SCENARIOS = [
-    { id: "forskola", icon: "🏫", title: "Vi går till förskolan", place: "framme vid förskolan", cheer: "Nu går vi!", adults: true,
+    { id: "forskola", icon: "🏫", title: "Vi går till förskolan", place: "framme vid förskolan", cheer: "Nu går vi!", people: ["sevgi", "susanne"],
       svg: '<rect x="874" y="120" width="118" height="190" rx="10" fill="#fff3b0"/>' +
         '<path d="M864 126 L933 70 L1002 126 Z" fill="#4d96ff"/>' +
         '<line x1="933" y1="70" x2="933" y2="30" stroke="#2b3a55" stroke-width="3"/>' +
@@ -629,7 +629,27 @@ body {
         '<rect x="864" y="244" width="10" height="8" rx="2" fill="#ffd166"/>' +
         '<circle cx="892" cy="292" r="18" fill="#2b3a55"/><circle cx="892" cy="292" r="7" fill="#c7c9cc"/>' +
         '<circle cx="968" cy="292" r="18" fill="#2b3a55"/><circle cx="968" cy="292" r="7" fill="#c7c9cc"/>' +
-        '<text x="994" y="340" ' + T + '>Bilen</text>' }
+        '<text x="994" y="340" ' + T + '>Bilen</text>' },
+    { id: "landet", icon: "🏡", title: "Vi åker till farmor och farfar", place: "framme hos farmor och farfar på landet",
+      cheer: "Nu blir det kalas!", people: ["farmor", "farfar"],
+      svg: '<line x1="862" y1="150" x2="862" y2="40" stroke="#f4f1e8" stroke-width="4"/>' +
+        '<circle cx="862" cy="38" r="4" fill="#ffc93c"/>' +
+        '<rect x="820" y="44" width="40" height="26" fill="#2e6fbf"/>' +
+        '<rect x="820" y="53" width="40" height="7" fill="#ffc93c"/><rect x="842" y="44" width="7" height="26" fill="#ffc93c"/>' +
+        '<rect x="960" y="88" width="16" height="34" fill="#a33a2a"/><rect x="956" y="84" width="24" height="7" rx="2" fill="#4a4e57"/>' +
+        '<rect x="874" y="146" width="122" height="164" fill="#a3302a"/>' +
+        '<path d="M874 154 V310 M996 154 V310" stroke="#f4f1e8" stroke-width="8"/>' +
+        '<path d="M880 168 H990 M880 188 H990 M880 208 H990 M880 228 H990 M880 248 H990 M880 268 H990 M880 288 H990" stroke="#8f2622" stroke-width="1.5"/>' +
+        '<path d="M862 152 L935 92 L1008 152 Z" fill="#5b3a32"/>' +
+        '<path d="M862 152 H1008" stroke="#f4f1e8" stroke-width="5"/>' +
+        '<rect x="888" y="168" width="30" height="30" fill="#bde0fe" stroke="#f4f1e8" stroke-width="5"/>' +
+        '<path d="M903 168 V198 M888 183 H918" stroke="#f4f1e8" stroke-width="2.5"/>' +
+        '<rect x="952" y="168" width="30" height="30" fill="#bde0fe" stroke="#f4f1e8" stroke-width="5"/>' +
+        '<path d="M967 168 V198 M952 183 H982" stroke="#f4f1e8" stroke-width="2.5"/>' +
+        '<rect x="920" y="244" width="30" height="66" rx="3" fill="#2f6b4f" stroke="#f4f1e8" stroke-width="4"/>' +
+        '<circle cx="880" cy="300" r="9" fill="#5aa33a"/><circle cx="990" cy="300" r="9" fill="#5aa33a"/>' +
+        '<circle cx="877" cy="296" r="3" fill="#ff8fb1"/><circle cx="993" cy="296" r="3" fill="#fff"/>' +
+        label("Farmor &amp; farfar") }
   ];
   function scenario() {
     return SCENARIOS.filter(function (x) { return x.id === state.scenario; })[0] || SCENARIOS[0];
@@ -727,7 +747,7 @@ body {
     kidEls[k.id] = el;
   });
   var ADULTS = [
-    { name: "Sevgi", x: 88.8, svg:
+    { id: "sevgi", name: "Sevgi", x: 88.8, svg:
       '<svg viewBox="0 0 60 130" aria-hidden="true">' +
       '<ellipse cx="30" cy="128" rx="20" ry="3" fill="rgba(0,0,0,.15)"/>' +
       '<path d="M10 22 Q8 -2 30 0 Q52 -2 50 22 Q56 44 48 60 H12 Q4 44 10 22Z" fill="#1d1414"/>' +
@@ -743,7 +763,7 @@ body {
       '<path d="M24 35 Q30 40 36 35" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/>' +
       '<circle cx="13" cy="33" r="2.2" fill="#ffc93c"/><circle cx="47" cy="33" r="2.2" fill="#ffc93c"/>' +
       '</svg>' },
-    { name: "Susanne", x: 96.2, svg:
+    { id: "susanne", name: "Susanne", x: 96.2, svg:
       '<svg viewBox="0 0 60 130" aria-hidden="true">' +
       '<ellipse cx="30" cy="128" rx="20" ry="3" fill="rgba(0,0,0,.15)"/>' +
       '<rect x="20" y="90" width="9" height="36" rx="4.5" fill="#5b4a3a"/><rect x="31" y="90" width="9" height="36" rx="4.5" fill="#5b4a3a"/>' +
@@ -764,6 +784,45 @@ body {
       '<path d="M20 22 Q22 20 24 22 M36 22 Q38 20 40 22" stroke="#b9886a" stroke-width="1" fill="none"/>' +
       '</svg>' }
   ];
+  ADULTS.push(
+    { id: "farmor", name: "Farmor", x: 88.8, svg:
+      '<svg viewBox="0 0 60 130" aria-hidden="true">' +
+      '<ellipse cx="30" cy="128" rx="20" ry="3" fill="rgba(0,0,0,.15)"/>' +
+      '<rect x="21" y="96" width="8" height="30" rx="4" fill="#f3cfb3"/><rect x="31" y="96" width="8" height="30" rx="4" fill="#f3cfb3"/>' +
+      '<rect x="18" y="122" width="12" height="6" rx="3" fill="#5b3a32"/><rect x="30" y="122" width="12" height="6" rx="3" fill="#5b3a32"/>' +
+      '<rect class="arm l" x="5" y="50" width="8" height="34" rx="4" fill="#c0392b"/>' +
+      '<rect class="arm r" x="47" y="50" width="8" height="34" rx="4" fill="#c0392b"/>' +
+      '<circle cx="9" cy="84" r="4" fill="#f3cfb3"/>' +
+      '<path d="M12 50 Q30 42 48 50 L54 102 H6 Z" fill="#c0392b"/>' +
+      '<path d="M18 60 H42 L46 100 H14 Z" fill="#fff"/>' +
+      '<circle cx="22" cy="72" r="2" fill="#ff8fb1"/><circle cx="36" cy="82" r="2" fill="#ff8fb1"/><circle cx="26" cy="92" r="2" fill="#ff8fb1"/>' +
+      '<circle cx="30" cy="5" r="9" fill="#d9dce0"/>' +
+      '<circle cx="30" cy="27" r="16" fill="#f3cfb3"/>' +
+      '<path d="M13 28 Q12 10 30 10 Q48 10 47 28 Q44 18 30 17 Q16 18 13 28Z" fill="#d9dce0"/>' +
+      '<circle cx="24" cy="28" r="2.2" fill="#2b3a55"/><circle cx="36" cy="28" r="2.2" fill="#2b3a55"/>' +
+      '<path d="M24 35 Q30 40 36 35" stroke="#2b3a55" stroke-width="2.2" fill="none" stroke-linecap="round"/>' +
+      '<circle cx="19" cy="33" r="3.2" fill="#ff9e9e" opacity=".7"/><circle cx="41" cy="33" r="3.2" fill="#ff9e9e" opacity=".7"/>' +
+      '</svg>' },
+    { id: "farfar", name: "Farfar", x: 96.2, svg:
+      '<svg viewBox="0 0 60 130" aria-hidden="true">' +
+      '<ellipse cx="30" cy="128" rx="20" ry="3" fill="rgba(0,0,0,.15)"/>' +
+      '<rect x="20" y="90" width="9" height="36" rx="4.5" fill="#6b4f3a"/><rect x="31" y="90" width="9" height="36" rx="4.5" fill="#6b4f3a"/>' +
+      '<rect class="arm l" x="5" y="50" width="8" height="34" rx="4" fill="#4f8a5b"/>' +
+      '<rect class="arm r" x="47" y="50" width="8" height="34" rx="4" fill="#4f8a5b"/>' +
+      '<circle cx="9" cy="84" r="4" fill="#f0c4a4"/>' +
+      '<path d="M12 50 Q30 42 48 50 L49 96 H11 Z" fill="#4f8a5b"/>' +
+      '<path d="M12 62 H48 M12 74 H48 M12 86 H48 M22 50 V96 M38 50 V96" stroke="#3c6e46" stroke-width="2"/>' +
+      '<path d="M20 50 V96 M40 50 V96" stroke="#6b4f3a" stroke-width="3.5"/>' +
+      '<circle cx="30" cy="27" r="16" fill="#f0c4a4"/>' +
+      '<path d="M14 30 Q13 22 16 20 L17 32Z M46 30 Q47 22 44 20 L43 32Z" fill="#eceef0"/>' +
+      '<path d="M13 19 Q14 6 30 6 Q46 6 47 19 Z" fill="#c9b38a"/>' +
+      '<path d="M30 17 Q46 15 50 20 Q44 23 30 21Z" fill="#b59f76"/>' +
+      '<circle cx="24" cy="27" r="2.2" fill="#2b3a55"/><circle cx="36" cy="27" r="2.2" fill="#2b3a55"/>' +
+      '<path d="M22 34 Q30 31 38 34 Q34 38 30 36 Q26 38 22 34Z" fill="#eceef0"/>' +
+      '<path d="M26 39 Q30 42 34 39" stroke="#2b3a55" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+      '<circle cx="19" cy="32" r="3" fill="#ff9e9e" opacity=".6"/><circle cx="41" cy="32" r="3" fill="#ff9e9e" opacity=".6"/>' +
+      '</svg>' }
+  );
   var adultEls = ADULTS.map(function (a) {
     var el = document.createElement("div");
     el.className = "adult";
@@ -775,6 +834,7 @@ body {
   });
   function waveAdults() {
     adultEls.forEach(function (el) {
+      if (el.hidden) return;
       el.classList.remove("wave"); void el.offsetWidth; el.classList.add("wave");
     });
   }
@@ -782,7 +842,7 @@ body {
     var sc = scenario();
     var g = document.getElementById("dest");
     if (g.getAttribute("data-id") !== sc.id) { g.innerHTML = sc.svg; g.setAttribute("data-id", sc.id); }
-    adultEls.forEach(function (el) { el.hidden = !sc.adults; });
+    adultEls.forEach(function (el, i) { el.hidden = (sc.people || []).indexOf(ADULTS[i].id) === -1; });
   }
 
   function xFor(i, n) { return n === 0 ? ROAD_START : ROAD_START + (ROAD_END - ROAD_START) * (i / n); }
@@ -936,7 +996,7 @@ body {
     if (finished && !wasFinished) {
       setTimeout(function () {
         el.classList.add("cheer");
-        if (scenario().adults) waveAdults();
+        if (scenario().people) waveAdults();
         var pos = kidScreenPos(k.id);
         confetti(pos[0], pos[1], 90);
       }, 1100);

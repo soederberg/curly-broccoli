@@ -1,6 +1,6 @@
 # Morgonvägen
 
-Ett morgonspel för Sigge och Charlie. Varje avbockad syssla (toa, kläder, frukost, tänder, overall, mössa, vantar, skor) flyttar figuren ett steg på vägen från det röda tegelhuset till målet. Målet väljs under Inställningar: förskolan (där pedagogerna Sevgi och Susanne väntar), lekplatsen i parken, skogen, mataffären eller bilen. Solen går upp i takt med att sysslorna blir klara. När båda barnen är framme blir det fest.
+Ett morgonspel för Sigge och Charlie. Varje avbockad syssla (toa, kläder, frukost, tänder, overall, mössa, vantar, skor) flyttar figuren ett steg på vägen från det röda tegelhuset till målet. Målet väljs under Inställningar: förskolan (där pedagogerna Sevgi och Susanne väntar), lekplatsen i parken, skogen, mataffären, bilen eller farmor och farfar på landet. Solen går upp i takt med att sysslorna blir klara. När båda barnen är framme blir det fest.
 
 ## Så kör du den på TV:n
 1. Öppna sidan i Safari på iPad eller iPhone.
