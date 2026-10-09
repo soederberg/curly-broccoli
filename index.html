@@ -141,6 +141,46 @@ body {
 }
 .kid.sigge .tag { background: var(--sigge); }
 .kid.charlie .tag { background: var(--charlie); }
+.adult {
+  position: absolute;
+  width: 6.8%;
+  transform: translate(-50%, -100%);
+  z-index: 2;
+  pointer-events: none;
+}
+.adult svg { width: 100%; height: auto; display: block; overflow: visible; }
+.adult .tag {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translate(-50%, -2px);
+  font: 800 clamp(.5rem, 1vw, 1rem) var(--font-display);
+  color: var(--ink);
+  background: #fff;
+  padding: 0 .55em;
+  border-radius: 999px;
+  white-space: nowrap;
+  line-height: 1.5;
+  box-shadow: 0 2px 0 rgba(43,58,85,.12);
+}
+.adult .arm.r { transform-box: fill-box; transform-origin: top center; }
+.adult.wave .arm.r { animation: wave .45s ease-in-out 8 alternate; }
+@keyframes wave { from { transform: rotate(-150deg); } to { transform: rotate(-115deg); } }
+.scenarios { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.scenarios button {
+  display: flex; align-items: center; gap: 10px;
+  font: 800 1.05rem var(--font-body);
+  color: var(--ink);
+  background: #fff;
+  border: 3px solid rgba(43,58,85,.12);
+  border-radius: 18px;
+  padding: 10px 12px;
+  cursor: pointer;
+  text-align: left;
+}
+.scenarios button .ico { font-size: 1.9rem; line-height: 1; }
+.scenarios button[aria-pressed="true"] { border-color: var(--ink); background: #ffe08a; }
+.scenarios button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 .kid .leg { transform-box: fill-box; transform-origin: top center; }
 .kid.walking .body-wrap { animation: bob .28s ease-in-out infinite alternate; }
 .kid.walking .leg.l { animation: stepL .28s ease-in-out infinite alternate; }
@@ -297,7 +337,7 @@ body {
   user-select: text;
 }
 .field:focus { outline: none; border-color: var(--ink); }
-.settings td.task-cell { display: flex; align-items: center; gap: 8px; }
+.settings td.task-cell .tc { display: flex; align-items: center; gap: 8px; }
 .settings td.task-cell .ico { font-size: 1.6rem; line-height: 1; }
 .settings td.task-cell .name { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 .mini {
@@ -352,6 +392,7 @@ body {
   .stone { border-width: 2px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .adult.wave .arm.r { animation: none !important; }
   .kid, #sun, .stone, .task, .task .check { transition-duration: .01s !important; }
   .kid.walking .body-wrap, .kid.walking .leg, .kid.cheer .body-wrap { animation: none !important; }
 }
@@ -406,29 +447,36 @@ body {
         <rect x="636" y="104" width="8" height="28" fill="#8a5a3b"/><circle cx="640" cy="94" r="24" fill="#5aa33a"/>
         <rect x="246" y="112" width="7" height="22" fill="#8a5a3b"/><circle cx="250" cy="104" r="18" fill="#5aa33a"/>
       </g>
-      <!-- Hemma -->
+      <!-- Hemma: rött tegelhus -->
+      <defs>
+        <pattern id="brick" width="24" height="12" patternUnits="userSpaceOnUse">
+          <rect width="24" height="12" fill="#b8432f"/>
+          <path d="M0 0.5 H24 M0 6.5 H24 M6 0.5 V6.5 M18 6.5 V12" stroke="#e7a58f" stroke-width="1.2"/>
+        </pattern>
+      </defs>
       <g>
-        <rect x="14" y="150" width="104" height="140" rx="8" fill="#ffd6a5"/>
-        <path d="M2 156 L66 96 L130 156 Z" fill="#e63946"/>
-        <rect x="88" y="104" width="14" height="30" fill="#b5651d"/>
-        <rect x="30" y="176" width="28" height="28" rx="4" fill="#bde0fe" stroke="#fff" stroke-width="4"/>
-        <rect x="74" y="176" width="28" height="28" rx="4" fill="#bde0fe" stroke="#fff" stroke-width="4"/>
-        <rect x="46" y="226" width="40" height="64" rx="18" fill="#8a5a3b"/>
-        <circle cx="78" cy="260" r="3.5" fill="#ffd166"/>
+        <rect x="80" y="96" width="16" height="36" fill="url(#brick)" stroke="#8f2f20" stroke-width="2"/>
+        <rect x="76" y="92" width="24" height="7" rx="2" fill="#5a5f6b"/>
+        <rect x="14" y="150" width="104" height="140" fill="url(#brick)"/>
+        <rect x="14" y="150" width="104" height="140" fill="none" stroke="#8f2f20" stroke-width="2"/>
+        <path d="M0 158 L66 98 L132 158 Z" fill="#4a4e57"/>
+        <path d="M14 145 L66 106 L118 145" fill="none" stroke="#5f646f" stroke-width="3"/>
+        <rect x="28" y="174" width="30" height="30" fill="#bde0fe" stroke="#fff" stroke-width="4"/>
+        <path d="M43 174 V204 M28 189 H58" stroke="#fff" stroke-width="2.5"/>
+        <rect x="74" y="174" width="30" height="30" fill="#bde0fe" stroke="#fff" stroke-width="4"/>
+        <path d="M89 174 V204 M74 189 H104" stroke="#fff" stroke-width="2.5"/>
+        <rect x="24" y="204" width="38" height="5" fill="#fff"/><rect x="70" y="204" width="38" height="5" fill="#fff"/>
+        <rect x="42" y="224" width="48" height="66" rx="4" fill="#fff"/>
+        <rect x="47" y="229" width="38" height="61" rx="3" fill="#2f5d8a"/>
+        <rect x="53" y="236" width="26" height="14" rx="2" fill="#bde0fe"/>
+        <circle cx="79" cy="264" r="3.5" fill="#ffd166"/>
+        <rect x="36" y="288" width="60" height="6" rx="2" fill="#9aa0a8"/>
+        <circle cx="24" cy="282" r="9" fill="#5aa33a"/><circle cx="108" cy="282" r="9" fill="#5aa33a"/>
+        <circle cx="21" cy="279" r="3" fill="#ff8fb1"/><circle cx="111" cy="279" r="3" fill="#ffd166"/>
         <text x="66" y="330" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="24" fill="#2b3a55">Hemma</text>
       </g>
-      <!-- Förskolan -->
-      <g>
-        <rect x="874" y="120" width="118" height="190" rx="10" fill="#fff3b0"/>
-        <path d="M864 126 L933 70 L1002 126 Z" fill="#4d96ff"/>
-        <line x1="933" y1="70" x2="933" y2="30" stroke="#2b3a55" stroke-width="3"/>
-        <path d="M934 30 L962 38 L934 46 Z" fill="#ff7a45"/>
-        <rect x="886" y="140" width="26" height="24" rx="4" fill="#bde0fe" stroke="#fff" stroke-width="4"/>
-        <rect x="954" y="140" width="26" height="24" rx="4" fill="#bde0fe" stroke="#fff" stroke-width="4"/>
-        <circle cx="900" cy="214" r="9" fill="#ff8fb1"/><circle cx="933" cy="210" r="9" fill="#ffd166"/><circle cx="966" cy="214" r="9" fill="#9ad66b"/>
-        <rect x="912" y="244" width="42" height="66" rx="18" fill="#4d96ff"/>
-        <text x="994" y="340" text-anchor="end" font-family="Baloo 2, sans-serif" font-weight="800" font-size="22" fill="#2b3a55">Förskolan</text>
-      </g>
+      <!-- Destination ritas av JS beroende på scenario -->
+      <g id="dest"></g>
     </svg>
     <div id="stones"></div>
   </div>
@@ -441,7 +489,7 @@ body {
 <div class="overlay" id="party" hidden>
   <div class="panel">
     <h2>Hurra! Alla är klara!</h2>
-    <p id="partyText">Sigge och Charlie är framme vid förskolan. Nu går vi!</p>
+    <p id="partyText"></p>
     <button class="big-btn" id="partyClose" type="button">Stäng</button>
   </div>
 </div>
@@ -449,6 +497,10 @@ body {
 <div class="overlay" id="settings" hidden>
   <div class="panel settings">
     <h2>Inställningar</h2>
+    <section>
+      <h3>Vart ska vi?</h3>
+      <div class="scenarios" id="scenarioGrid" role="group" aria-label="Välj scenario"></div>
+    </section>
     <section>
       <h3>Namn</h3>
       <div class="names">
@@ -462,7 +514,7 @@ body {
     </section>
     <section>
       <h3>Sysslor</h3>
-      <p class="hint">Bocka i vem som ska göra vad. Varje syssla flyttar figuren ett steg närmare förskolan.</p>
+      <p class="hint">Bocka i vem som ska göra vad. Varje syssla flyttar figuren ett steg närmare målet.</p>
       <table>
         <thead><tr><th>Syssla</th><th class="sigge" id="th-sigge">Sigge</th><th class="charlie" id="th-charlie">Charlie</th></tr></thead>
         <tbody id="settingsRows"></tbody>
@@ -518,6 +570,71 @@ body {
   var ICONS = ["⭐","🛁","🚿","🧼","💊","🧴","💇","🪮","🧦","👖","👗","🩳","🧣","🥾","🎒","🍎","🥛","🍌","🥪","💧",
     "📚","🧸","🛏️","🧹","🗑️","🐶","🐱","🌱","🚲","🛴","🚗","🎵","🎨","🧩","🙌","🤗","😴","☀️","🌧️","🏃"];
 
+  var T = 'font-family="Baloo 2, sans-serif" font-weight="800" font-size="22" fill="#2b3a55" text-anchor="end"';
+  function label(txt) { return '<text x="994" y="340" ' + T + '>' + txt + '</text>'; }
+  function pine(x, base, h, c) {
+    var w = h * 0.42;
+    return '<rect x="' + (x - 4) + '" y="' + (base - 14) + '" width="8" height="16" fill="#7a4b2a"/>' +
+      [0, 1, 2].map(function (i) {
+        var top = base - 12 - h + i * h * 0.28, bot = base - 12 - h * 0.45 + i * h * 0.24, ww = w * (0.6 + i * 0.25);
+        return '<path d="M' + x + " " + top + " L" + (x + ww) + " " + bot + " L" + (x - ww) + " " + bot + ' Z" fill="' + c + '"/>';
+      }).join("");
+  }
+  var SCENARIOS = [
+    { id: "forskola", icon: "🏫", title: "Vi går till förskolan", place: "framme vid förskolan", cheer: "Nu går vi!", adults: true,
+      svg: '<rect x="874" y="120" width="118" height="190" rx="10" fill="#fff3b0"/>' +
+        '<path d="M864 126 L933 70 L1002 126 Z" fill="#4d96ff"/>' +
+        '<line x1="933" y1="70" x2="933" y2="30" stroke="#2b3a55" stroke-width="3"/>' +
+        '<path d="M934 30 L962 38 L934 46 Z" fill="#ff7a45"/>' +
+        '<rect x="886" y="140" width="26" height="24" rx="4" fill="#bde0fe" stroke="#fff" stroke-width="4"/>' +
+        '<rect x="954" y="140" width="26" height="24" rx="4" fill="#bde0fe" stroke="#fff" stroke-width="4"/>' +
+        '<circle cx="900" cy="290" r="8" fill="#ff8fb1"/><circle cx="984" cy="292" r="8" fill="#ffd166"/>' +
+        '<rect x="915" y="244" width="36" height="66" rx="14" fill="#4d96ff"/>' + label("Förskolan") },
+    { id: "park", icon: "🛝", title: "Vi går till parken", place: "framme vid lekplatsen", cheer: "Nu leker vi!",
+      svg: '<ellipse cx="930" cy="304" rx="70" ry="12" fill="#e9d7b0"/>' +
+        '<path d="M868 300 L880 180 M924 300 L912 180" stroke="#ff7a45" stroke-width="7" stroke-linecap="round"/>' +
+        '<path d="M874 180 H918" stroke="#ff7a45" stroke-width="8" stroke-linecap="round"/>' +
+        '<path d="M888 182 V256 M904 182 V256" stroke="#2b3a55" stroke-width="2.5"/>' +
+        '<rect x="882" y="254" width="28" height="7" rx="3" fill="#4d96ff"/>' +
+        '<path d="M938 300 V176 M960 300 V176" stroke="#3fb6a8" stroke-width="6"/>' +
+        '<path d="M938 200 H960 M938 224 H960 M938 248 H960 M938 272 H960" stroke="#3fb6a8" stroke-width="4"/>' +
+        '<path d="M930 172 H968 L962 158 H936 Z" fill="#ffc93c"/>' +
+        '<path d="M960 178 Q 978 190 984 240 Q 988 286 998 296" stroke="#ff8fb1" stroke-width="12" fill="none" stroke-linecap="round"/>' +
+        '<rect x="936" y="286" width="26" height="12" rx="3" fill="#ffd166"/><path d="M940 286 L944 278 L950 286" fill="#e63946"/>' +
+        label("Lekplatsen") },
+    { id: "skog", icon: "🌲", title: "Vi går till skogen", place: "framme i skogen", cheer: "Nu går vi på äventyr!",
+      svg: pine(770, 140, 70, "#3f8f3a") + pine(820, 136, 90, "#357a32") +
+        pine(905, 312, 190, "#2f6e2c") + pine(965, 306, 160, "#3f8f3a") + pine(872, 300, 120, "#4a9a3f") +
+        '<rect x="930" y="290" width="6" height="12" fill="#fff"/><path d="M922 292 Q933 272 944 292 Z" fill="#e63946"/>' +
+        '<circle cx="929" cy="286" r="2" fill="#fff"/><circle cx="938" cy="284" r="2" fill="#fff"/>' +
+        '<ellipse cx="990" cy="300" rx="14" ry="8" fill="#9aa0a8"/>' + label("Skogen") },
+    { id: "affar", icon: "🛒", title: "Vi går till mataffären", place: "framme vid mataffären", cheer: "Nu handlar vi!",
+      svg: '<rect x="872" y="140" width="124" height="170" rx="6" fill="#eef4f6"/>' +
+        '<rect x="878" y="116" width="112" height="28" rx="8" fill="#2f9e5b"/>' +
+        '<text x="934" y="137" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="20" fill="#fff">MAT</text>' +
+        '<path d="M868 148 H1000 V170 Q993 180 986 170 Q979 180 972 170 Q965 180 958 170 Q951 180 944 170 Q937 180 930 170 Q923 180 916 170 Q909 180 902 170 Q895 180 888 170 Q881 180 874 170 Q868 178 868 170 Z" fill="#e63946"/>' +
+        '<path d="M888 148 V172 M916 148 V172 M944 148 V172 M972 148 V172" stroke="#fff" stroke-width="9"/>' +
+        '<rect x="882" y="192" width="54" height="60" rx="4" fill="#bde0fe" stroke="#fff" stroke-width="4"/>' +
+        '<rect x="948" y="200" width="38" height="110" rx="4" fill="#bde0fe" stroke="#fff" stroke-width="4"/>' +
+        '<line x1="967" y1="204" x2="967" y2="306" stroke="#fff" stroke-width="3"/>' +
+        '<rect x="878" y="276" width="62" height="30" rx="3" fill="#b5651d"/>' +
+        '<circle cx="890" cy="274" r="7" fill="#e63946"/><circle cx="904" cy="273" r="7" fill="#ffc93c"/>' +
+        '<circle cx="918" cy="274" r="7" fill="#7cc142"/><circle cx="931" cy="273" r="7" fill="#ff8c1a"/>' +
+        label("Mataffären") },
+    { id: "bil", icon: "🚗", title: "Vi ska åka bil", place: "framme vid bilen", cheer: "Nu åker vi!",
+      svg: '<rect x="858" y="296" width="142" height="18" rx="6" fill="#c7c9cc"/>' +
+        '<path d="M864 290 V246 Q864 236 876 234 L898 230 L918 196 Q922 190 932 190 H962 Q972 190 978 198 L996 232 Q1000 238 1000 248 V290 Z" fill="#4d96ff"/>' +
+        '<path d="M922 228 L934 200 H950 V228 Z M956 228 V200 H966 Q970 200 973 205 L985 228 Z" fill="#bde0fe"/>' +
+        '<rect x="864" y="262" width="136" height="6" fill="#2f6fd6"/>' +
+        '<rect x="864" y="244" width="10" height="8" rx="2" fill="#ffd166"/>' +
+        '<circle cx="892" cy="292" r="18" fill="#2b3a55"/><circle cx="892" cy="292" r="7" fill="#c7c9cc"/>' +
+        '<circle cx="968" cy="292" r="18" fill="#2b3a55"/><circle cx="968" cy="292" r="7" fill="#c7c9cc"/>' +
+        '<text x="994" y="340" ' + T + '>Bilen</text>' }
+  ];
+  function scenario() {
+    return SCENARIOS.filter(function (x) { return x.id === state.scenario; })[0] || SCENARIOS[0];
+  }
+
   function esc(v) {
     return String(v).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
@@ -537,6 +654,7 @@ body {
       sound: true,
       speak: true,
       names: { sigge: "Sigge", charlie: "Charlie" },
+      scenario: "forskola",
       custom: []
     };
   }
@@ -567,7 +685,7 @@ body {
   function showDate() {
     try {
       var s = new Date().toLocaleDateString("sv-SE", { weekday: "long", day: "numeric", month: "long" });
-      dateEl.textContent = s.charAt(0).toUpperCase() + s.slice(1);
+      dateEl.textContent = s.charAt(0).toUpperCase() + s.slice(1) + " · " + scenario().title;
     } catch (e) { dateEl.textContent = ""; }
   }
 
@@ -608,6 +726,65 @@ body {
     scene.appendChild(el);
     kidEls[k.id] = el;
   });
+  var ADULTS = [
+    { name: "Sevgi", x: 88.8, svg:
+      '<svg viewBox="0 0 60 130" aria-hidden="true">' +
+      '<ellipse cx="30" cy="128" rx="20" ry="3" fill="rgba(0,0,0,.15)"/>' +
+      '<path d="M10 22 Q8 -2 30 0 Q52 -2 50 22 Q56 44 48 60 H12 Q4 44 10 22Z" fill="#1d1414"/>' +
+      '<rect x="20" y="90" width="9" height="36" rx="4.5" fill="#2b3a55"/><rect x="31" y="90" width="9" height="36" rx="4.5" fill="#2b3a55"/>' +
+      '<rect class="arm l" x="5" y="50" width="8" height="34" rx="4" fill="#8e44ad"/>' +
+      '<rect class="arm r" x="47" y="50" width="8" height="34" rx="4" fill="#8e44ad"/>' +
+      '<circle cx="9" cy="84" r="4" fill="#7a4a2a"/>' +
+      '<path d="M12 50 Q30 42 48 50 L52 96 H8 Z" fill="#8e44ad"/>' +
+      '<path d="M22 48 Q30 58 38 48" fill="#7a4a2a"/>' +
+      '<circle cx="30" cy="27" r="17" fill="#7a4a2a"/>' +
+      '<path d="M13 24 Q16 8 30 9 Q44 8 47 24 Q40 14 30 16 Q20 14 13 24Z" fill="#1d1414"/>' +
+      '<circle cx="24" cy="28" r="2.4" fill="#1d1414"/><circle cx="36" cy="28" r="2.4" fill="#1d1414"/>' +
+      '<path d="M24 35 Q30 40 36 35" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/>' +
+      '<circle cx="13" cy="33" r="2.2" fill="#ffc93c"/><circle cx="47" cy="33" r="2.2" fill="#ffc93c"/>' +
+      '</svg>' },
+    { name: "Susanne", x: 96.2, svg:
+      '<svg viewBox="0 0 60 130" aria-hidden="true">' +
+      '<ellipse cx="30" cy="128" rx="20" ry="3" fill="rgba(0,0,0,.15)"/>' +
+      '<rect x="20" y="90" width="9" height="36" rx="4.5" fill="#5b4a3a"/><rect x="31" y="90" width="9" height="36" rx="4.5" fill="#5b4a3a"/>' +
+      '<rect class="arm l" x="5" y="50" width="8" height="34" rx="4" fill="#3d7ea6"/>' +
+      '<rect class="arm r" x="47" y="50" width="8" height="34" rx="4" fill="#3d7ea6"/>' +
+      '<circle cx="9" cy="84" r="4" fill="#f3cfb3"/>' +
+      '<path d="M12 50 Q30 42 48 50 L50 96 H10 Z" fill="#3d7ea6"/>' +
+      '<path d="M24 48 L30 96 L36 48 Z" fill="#f4f1e8"/>' +
+      '<circle cx="30" cy="62" r="1.6" fill="#fff"/><circle cx="30" cy="74" r="1.6" fill="#fff"/>' +
+      '<path d="M11 26 Q10 6 30 6 Q50 6 49 26 L50 46 Q44 48 42 40 L18 40 Q16 48 10 46Z" fill="#cfd3d8"/>' +
+      '<circle cx="30" cy="27" r="16" fill="#f3cfb3"/>' +
+      '<path d="M13 26 Q14 9 30 10 Q46 9 47 26 Q42 16 33 17 Q22 15 13 26Z" fill="#cfd3d8"/>' +
+      '<circle cx="24" cy="28" r="4.6" fill="none" stroke="#7a4b2a" stroke-width="1.6"/>' +
+      '<circle cx="36" cy="28" r="4.6" fill="none" stroke="#7a4b2a" stroke-width="1.6"/>' +
+      '<path d="M28.6 28 H31.4" stroke="#7a4b2a" stroke-width="1.6"/>' +
+      '<circle cx="24" cy="28" r="1.8" fill="#2b3a55"/><circle cx="36" cy="28" r="1.8" fill="#2b3a55"/>' +
+      '<path d="M24 35 Q30 40 36 35" stroke="#2b3a55" stroke-width="2.2" fill="none" stroke-linecap="round"/>' +
+      '<path d="M20 22 Q22 20 24 22 M36 22 Q38 20 40 22" stroke="#b9886a" stroke-width="1" fill="none"/>' +
+      '</svg>' }
+  ];
+  var adultEls = ADULTS.map(function (a) {
+    var el = document.createElement("div");
+    el.className = "adult";
+    el.style.left = a.x + "%";
+    el.style.top = "86%";
+    el.innerHTML = '<span class="tag">' + a.name + "</span>" + a.svg;
+    scene.appendChild(el);
+    return el;
+  });
+  function waveAdults() {
+    adultEls.forEach(function (el) {
+      el.classList.remove("wave"); void el.offsetWidth; el.classList.add("wave");
+    });
+  }
+  function renderDest() {
+    var sc = scenario();
+    var g = document.getElementById("dest");
+    if (g.getAttribute("data-id") !== sc.id) { g.innerHTML = sc.svg; g.setAttribute("data-id", sc.id); }
+    adultEls.forEach(function (el) { el.hidden = !sc.adults; });
+  }
+
   function xFor(i, n) { return n === 0 ? ROAD_START : ROAD_START + (ROAD_END - ROAD_START) * (i / n); }
 
   function renderScene() {
@@ -658,7 +835,7 @@ body {
       boardsEl.appendChild(board);
     });
   }
-  function render() { renderScene(); renderBoards(); }
+  function render() { renderDest(); renderScene(); renderBoards(); }
 
   // ---------- Ljud & tal ----------
   var actx = null;
@@ -759,21 +936,23 @@ body {
     if (finished && !wasFinished) {
       setTimeout(function () {
         el.classList.add("cheer");
+        if (scenario().adults) waveAdults();
         var pos = kidScreenPos(k.id);
         confetti(pos[0], pos[1], 90);
       }, 1100);
       tones([523, 659, 784, 1047], 0.12);
       if (allDone) {
         var both = nm("sigge") + " och " + nm("charlie");
-        document.getElementById("partyText").textContent = both + " är framme vid förskolan. Nu går vi!";
-        say("Hurra! " + both + " är framme vid förskolan!");
+        var sc = scenario();
+        document.getElementById("partyText").textContent = both + " är " + sc.place + ". " + sc.cheer;
+        say("Hurra! " + both + " är " + sc.place + "! " + sc.cheer);
         setTimeout(function () {
           document.getElementById("party").hidden = false;
           confetti(0.5, 0.35, 220);
           tones([523, 659, 784, 1047, 784, 1047, 1319], 0.14, "square");
         }, 1500);
       } else {
-        say(nm(k.id) + " är framme vid förskolan!");
+        say(nm(k.id) + " är " + scenario().place + "!");
       }
     } else {
       tones([659, 880], 0.09);
@@ -827,13 +1006,13 @@ body {
     var rows = "";
     allTasks().forEach(function (t) {
       var custom = t.id.charAt(0) === "c";
-      rows += '<tr><td class="task-cell"><span class="ico">' + esc(t.icon) + '</span><span class="name">' + esc(t.label) + "</span>";
+      rows += '<tr><td class="task-cell"><div class="tc"><span class="ico">' + esc(t.icon) + '</span><span class="name">' + esc(t.label) + "</span>";
       if (custom) {
         rows += '<button class="mini" type="button" data-edit="' + t.id + '">Ändra</button>' +
           '<button class="mini' + (deleteArmed === t.id ? " warn" : "") + '" type="button" data-del="' + t.id + '">' +
           (deleteArmed === t.id ? "Säker?" : "Ta bort") + "</button>";
       }
-      rows += "</td>";
+      rows += "</div></td>";
       KIDS.forEach(function (k) {
         var on = state.plan[k.id].indexOf(t.id) !== -1;
         rows += '<td><input type="checkbox" id="p-' + k.id + "-" + t.id + '" data-kid="' + k.id +
@@ -843,8 +1022,24 @@ body {
     });
     document.getElementById("settingsRows").innerHTML = rows;
     document.getElementById("speakToggle").checked = state.speak;
+    renderScenarioGrid();
     renderIconGrid();
   }
+  function renderScenarioGrid() {
+    var html = "";
+    SCENARIOS.forEach(function (sc) {
+      html += '<button type="button" data-sc="' + sc.id + '" aria-pressed="' + (sc.id === scenario().id) + '">' +
+        '<span class="ico">' + sc.icon + "</span><span>" + sc.title + "</span></button>";
+    });
+    document.getElementById("scenarioGrid").innerHTML = html;
+  }
+  document.getElementById("scenarioGrid").addEventListener("click", function (e) {
+    var btn = e.target.closest("button[data-sc]");
+    if (!btn) return;
+    state.scenario = btn.getAttribute("data-sc"); save();
+    renderScenarioGrid(); showDate(); render();
+    tones([523, 659], 0.08);
+  });
   function renderIconGrid() {
     var html = "";
     ICONS.forEach(function (ic) {
