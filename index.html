@@ -189,6 +189,8 @@ body {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(8px, 1vw, 14px);
 }
+.tasks.many { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.tasks.many .icon { font-size: clamp(1.8rem, 3.2vw, 3rem); }
 .task {
   position: relative;
   appearance: none;
@@ -276,9 +278,77 @@ body {
 .settings input[type=checkbox] { width: 26px; height: 26px; accent-color: var(--ink); }
 .settings .row { display: flex; gap: 10px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
 .settings .hint { font-size: .95rem; text-align: left; }
+.settings h3 { margin: 18px 0 8px; font: 800 1.35rem var(--font-display); }
+.settings section + section { border-top: 2px dashed rgba(43,58,85,.12); margin-top: 14px; }
+.names { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.names label { display: flex; flex-direction: column; gap: 4px; font-weight: 800; min-width: 0; }
+.names label.sigge { color: var(--sigge); }
+.names label.charlie { color: var(--charlie); }
+.field {
+  font: 800 1.15rem var(--font-body);
+  color: var(--ink);
+  background: #fff;
+  border: 3px solid rgba(43,58,85,.15);
+  border-radius: 14px;
+  padding: .45em .7em;
+  width: 100%;
+  min-width: 0;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.field:focus { outline: none; border-color: var(--ink); }
+.settings td.task-cell { display: flex; align-items: center; gap: 8px; }
+.settings td.task-cell .ico { font-size: 1.6rem; line-height: 1; }
+.settings td.task-cell .name { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.mini {
+  font: 800 .85rem var(--font-body);
+  border: 2px solid rgba(43,58,85,.15);
+  background: #fff;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: .3em .7em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.mini.warn { background: #ffe08a; border-color: #e0b84a; }
+.new-task { display: flex; flex-direction: column; gap: 10px; }
+.new-task .line { display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap; }
+.new-task .preview {
+  width: 64px; height: 64px; flex: none;
+  display: grid; place-items: center;
+  font-size: 2.4rem;
+  background: #fff;
+  border: 3px solid rgba(43,58,85,.15);
+  border-radius: 18px;
+}
+.new-task .line .field { flex: 1 1 180px; }
+.icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(46px, 1fr));
+  gap: 6px;
+}
+.icons button {
+  font-size: 1.6rem;
+  line-height: 1;
+  aspect-ratio: 1;
+  border: 3px solid transparent;
+  background: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 0;
+}
+.icons button[aria-pressed="true"] { border-color: var(--ink); background: #ffe08a; }
+.icons button:focus-visible, .mini:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.own-icon { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: .95rem; color: var(--ink-soft); }
+.own-icon .field { width: 5.5em; text-align: center; font-size: 1.4rem; padding: .2em; }
+.form-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.big-btn.ghost { background: #fff; box-shadow: 0 5px 0 rgba(43,58,85,.15); }
+.big-btn:disabled { opacity: .45; cursor: default; }
+.error { color: #c0392b; font-weight: 800; margin: 0; }
 
 @media (max-width: 760px) {
   .boards { grid-template-columns: 1fr; }
+  .names { grid-template-columns: 1fr; }
   .stone { border-width: 2px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -296,7 +366,7 @@ body {
     </div>
     <div class="tools">
       <button class="tool" id="soundBtn" type="button">🔊 Ljud på</button>
-      <button class="tool" id="settingsBtn" type="button">⚙️ Sysslor</button>
+      <button class="tool" id="settingsBtn" type="button">⚙️ Inställningar</button>
       <button class="tool" id="resetBtn" type="button">🌅 Ny morgon</button>
     </div>
   </div>
@@ -371,20 +441,53 @@ body {
 <div class="overlay" id="party" hidden>
   <div class="panel">
     <h2>Hurra! Alla är klara!</h2>
-    <p>Sigge och Charlie är framme vid förskolan. Nu går vi!</p>
+    <p id="partyText">Sigge och Charlie är framme vid förskolan. Nu går vi!</p>
     <button class="big-btn" id="partyClose" type="button">Stäng</button>
   </div>
 </div>
 
 <div class="overlay" id="settings" hidden>
   <div class="panel settings">
-    <h2>Sysslor</h2>
-    <p class="hint">Välj vilka sysslor varje barn ska göra. Varje syssla flyttar figuren ett steg närmare förskolan.</p>
-    <table>
-      <thead><tr><th>Syssla</th><th class="sigge">Sigge</th><th class="charlie">Charlie</th></tr></thead>
-      <tbody id="settingsRows"></tbody>
-    </table>
-    <div class="row">
+    <h2>Inställningar</h2>
+    <section>
+      <h3>Namn</h3>
+      <div class="names">
+        <label class="sigge" for="name-sigge">Figuren med pikétröja
+          <input class="field" id="name-sigge" maxlength="16" autocomplete="off" data-kid="sigge">
+        </label>
+        <label class="charlie" for="name-charlie">Figuren med keps
+          <input class="field" id="name-charlie" maxlength="16" autocomplete="off" data-kid="charlie">
+        </label>
+      </div>
+    </section>
+    <section>
+      <h3>Sysslor</h3>
+      <p class="hint">Bocka i vem som ska göra vad. Varje syssla flyttar figuren ett steg närmare förskolan.</p>
+      <table>
+        <thead><tr><th>Syssla</th><th class="sigge" id="th-sigge">Sigge</th><th class="charlie" id="th-charlie">Charlie</th></tr></thead>
+        <tbody id="settingsRows"></tbody>
+      </table>
+    </section>
+    <section>
+      <h3 id="formTitle">Ny syssla</h3>
+      <form class="new-task" id="taskForm" autocomplete="off">
+        <div class="line">
+          <span class="preview" id="iconPreview" aria-hidden="true">⭐</span>
+          <input class="field" id="taskName" maxlength="20" placeholder="Till exempel: Ta vitaminer" aria-label="Namn på sysslan">
+        </div>
+        <div class="icons" id="iconGrid" role="group" aria-label="Välj ikon"></div>
+        <div class="own-icon">
+          <label for="ownIcon">Eller skriv en egen emoji:</label>
+          <input class="field" id="ownIcon" maxlength="8" placeholder="🙂">
+        </div>
+        <p class="error" id="formError" hidden></p>
+        <div class="form-actions">
+          <button class="big-btn" id="taskSubmit" type="submit">Lägg till</button>
+          <button class="big-btn ghost" id="taskCancel" type="button" hidden>Avbryt</button>
+        </div>
+      </form>
+    </section>
+    <div class="row" style="margin-top:18px">
       <label><input type="checkbox" id="speakToggle"> Läs upp beröm</label>
       <button class="big-btn" id="settingsClose" type="button">Klar</button>
     </div>
@@ -412,6 +515,14 @@ body {
   var ROAD_START = 15, ROAD_END = 84; // procent av scenens bredd
   var PRAISE = ["Bra jobbat", "Snyggt", "Toppen", "Superbra", "Wow"];
   var STORE_KEY = "morgonvagen-v1";
+  var ICONS = ["⭐","🛁","🚿","🧼","💊","🧴","💇","🪮","🧦","👖","👗","🩳","🧣","🥾","🎒","🍎","🥛","🍌","🥪","💧",
+    "📚","🧸","🛏️","🧹","🗑️","🐶","🐱","🌱","🚲","🛴","🚗","🎵","🎨","🧩","🙌","🤗","😴","☀️","🌧️","🏃"];
+
+  function esc(v) {
+    return String(v).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
 
   function today() {
     var d = new Date();
@@ -424,13 +535,17 @@ body {
       done: { sigge: [], charlie: [] },
       plan: { sigge: all.slice(), charlie: all.slice() },
       sound: true,
-      speak: true
+      speak: true,
+      names: { sigge: "Sigge", charlie: "Charlie" },
+      custom: []
     };
   }
   var state = defaults();
   try {
     var saved = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
     if (saved && saved.plan) state = Object.assign(defaults(), saved);
+    if (!Array.isArray(state.custom)) state.custom = [];
+    state.names = Object.assign({ sigge: "Sigge", charlie: "Charlie" }, state.names);
   } catch (e) {}
   function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {} }
   function newMorningIfNeeded() {
@@ -438,7 +553,9 @@ body {
   }
   newMorningIfNeeded();
 
-  function planFor(kid) { return TASKS.filter(function (t) { return state.plan[kid].indexOf(t.id) !== -1; }); }
+  function nm(kid) { return (state.names[kid] || "").trim() || (kid === "sigge" ? "Sigge" : "Charlie"); }
+  function allTasks() { return TASKS.concat(state.custom); }
+  function planFor(kid) { return allTasks().filter(function (t) { return state.plan[kid].indexOf(t.id) !== -1; }); }
   function doneCount(kid) {
     var p = state.plan[kid];
     return state.done[kid].filter(function (id) { return p.indexOf(id) !== -1; }).length;
@@ -487,7 +604,7 @@ body {
     var el = document.createElement("div");
     el.className = "kid " + k.id + (k.small ? " small" : "");
     el.style.top = k.y + "%";
-    el.innerHTML = '<span class="tag">' + k.name + "</span>" + kidSvg(k);
+    el.innerHTML = '<span class="tag"></span>' + kidSvg(k);
     scene.appendChild(el);
     kidEls[k.id] = el;
   });
@@ -502,6 +619,7 @@ body {
           '" style="left:' + xFor(i, n) + "%;top:" + k.y + '%"></span>';
       }
       kidEls[k.id].style.left = xFor(d, n) + "%";
+      kidEls[k.id].querySelector(".tag").textContent = nm(k.id);
       kidEls[k.id].classList.toggle("finished", isFinished(k.id));
     });
     stonesEl.innerHTML = html;
@@ -520,18 +638,18 @@ body {
       var board = document.createElement("section");
       board.className = "board " + k.id;
       var plan = planFor(k.id);
-      board.innerHTML = '<header><h2>' + k.name + '</h2><span class="count">' +
+      board.innerHTML = '<header><h2>' + esc(nm(k.id)) + '</h2><span class="count">' +
         doneCount(k.id) + " av " + plan.length + "</span></header>";
       var grid = document.createElement("div");
-      grid.className = "tasks";
+      grid.className = "tasks" + (plan.length > 8 ? " many" : "");
       plan.forEach(function (t) {
         var done = state.done[k.id].indexOf(t.id) !== -1;
         var b = document.createElement("button");
         b.type = "button";
         b.className = "task" + (done ? " done" : "");
         b.setAttribute("aria-pressed", done ? "true" : "false");
-        b.setAttribute("aria-label", k.name + ": " + t.label);
-        b.innerHTML = '<span class="icon">' + t.icon + '</span><span class="label">' + t.label +
+        b.setAttribute("aria-label", nm(k.id) + ": " + t.label);
+        b.innerHTML = '<span class="icon">' + esc(t.icon) + '</span><span class="label">' + esc(t.label) +
           '</span><span class="check">✓</span>';
         b.addEventListener("click", function () { toggle(k, t); });
         grid.appendChild(b);
@@ -646,21 +764,24 @@ body {
       }, 1100);
       tones([523, 659, 784, 1047], 0.12);
       if (allDone) {
-        say("Hurra! Sigge och Charlie är framme vid förskolan!");
+        var both = nm("sigge") + " och " + nm("charlie");
+        document.getElementById("partyText").textContent = both + " är framme vid förskolan. Nu går vi!";
+        say("Hurra! " + both + " är framme vid förskolan!");
         setTimeout(function () {
           document.getElementById("party").hidden = false;
           confetti(0.5, 0.35, 220);
           tones([523, 659, 784, 1047, 784, 1047, 1319], 0.14, "square");
         }, 1500);
       } else {
-        say(k.name + " är framme vid förskolan!");
+        say(nm(k.id) + " är framme vid förskolan!");
       }
     } else {
       tones([659, 880], 0.09);
       var pos = kidScreenPos(k.id);
       confetti(pos[0], pos[1], 24);
-      say(PRAISE[Math.floor(Math.random() * PRAISE.length)] + " " + k.name + "! " +
-        t.say.charAt(0).toUpperCase() + t.say.slice(1) + ".");
+      var what = t.say || (t.label + " klart");
+      say(PRAISE[Math.floor(Math.random() * PRAISE.length)] + " " + nm(k.id) + "! " +
+        what.charAt(0).toUpperCase() + what.slice(1) + ".");
     }
   }
 
@@ -696,30 +817,141 @@ body {
   });
 
   var settingsEl = document.getElementById("settings");
+  var editing = null, chosenIcon = ICONS[0], deleteArmed = null, deleteTimer = 0;
   function renderSettings() {
+    KIDS.forEach(function (k) {
+      document.getElementById("th-" + k.id).textContent = nm(k.id);
+      var inp = document.getElementById("name-" + k.id);
+      if (document.activeElement !== inp) inp.value = state.names[k.id];
+    });
     var rows = "";
-    TASKS.forEach(function (t) {
-      rows += "<tr><td>" + t.icon + " " + t.label + "</td>";
+    allTasks().forEach(function (t) {
+      var custom = t.id.charAt(0) === "c";
+      rows += '<tr><td class="task-cell"><span class="ico">' + esc(t.icon) + '</span><span class="name">' + esc(t.label) + "</span>";
+      if (custom) {
+        rows += '<button class="mini" type="button" data-edit="' + t.id + '">Ändra</button>' +
+          '<button class="mini' + (deleteArmed === t.id ? " warn" : "") + '" type="button" data-del="' + t.id + '">' +
+          (deleteArmed === t.id ? "Säker?" : "Ta bort") + "</button>";
+      }
+      rows += "</td>";
       KIDS.forEach(function (k) {
         var on = state.plan[k.id].indexOf(t.id) !== -1;
         rows += '<td><input type="checkbox" id="p-' + k.id + "-" + t.id + '" data-kid="' + k.id +
-          '" data-task="' + t.id + '"' + (on ? " checked" : "") + ' aria-label="' + k.name + ": " + t.label + '"></td>';
+          '" data-task="' + t.id + '"' + (on ? " checked" : "") + ' aria-label="' + esc(nm(k.id) + ": " + t.label) + '"></td>';
       });
       rows += "</tr>";
     });
     document.getElementById("settingsRows").innerHTML = rows;
     document.getElementById("speakToggle").checked = state.speak;
+    renderIconGrid();
   }
+  function renderIconGrid() {
+    var html = "";
+    ICONS.forEach(function (ic) {
+      html += '<button type="button" data-icon="' + ic + '" aria-pressed="' + (ic === chosenIcon) + '">' + ic + "</button>";
+    });
+    document.getElementById("iconGrid").innerHTML = html;
+    document.getElementById("iconPreview").textContent = chosenIcon;
+  }
+  function resetForm() {
+    editing = null; chosenIcon = ICONS[0];
+    document.getElementById("taskName").value = "";
+    document.getElementById("ownIcon").value = "";
+    document.getElementById("formTitle").textContent = "Ny syssla";
+    document.getElementById("taskSubmit").textContent = "Lägg till";
+    document.getElementById("taskCancel").hidden = true;
+    document.getElementById("formError").hidden = true;
+    renderIconGrid();
+  }
+  function showError(msg) {
+    var e = document.getElementById("formError");
+    e.textContent = msg; e.hidden = false;
+  }
+
   document.getElementById("settingsBtn").addEventListener("click", function () {
-    renderSettings(); settingsEl.hidden = false;
+    resetForm(); renderSettings(); settingsEl.hidden = false;
+  });
+  KIDS.forEach(function (k) {
+    document.getElementById("name-" + k.id).addEventListener("input", function (e) {
+      state.names[k.id] = e.target.value; save(); render();
+      document.getElementById("th-" + k.id).textContent = nm(k.id);
+    });
   });
   document.getElementById("settingsRows").addEventListener("change", function (e) {
     var cb = e.target, kid = cb.getAttribute("data-kid"), id = cb.getAttribute("data-task");
     if (!kid) return;
-    var keep = TASKS.map(function (t) { return t.id; }).filter(function (tid) {
+    var keep = allTasks().map(function (t) { return t.id; }).filter(function (tid) {
       return tid === id ? cb.checked : state.plan[kid].indexOf(tid) !== -1;
     });
     state.plan[kid] = keep; save(); render();
+  });
+  document.getElementById("settingsRows").addEventListener("click", function (e) {
+    var btn = e.target.closest("button");
+    if (!btn) return;
+    var editId = btn.getAttribute("data-edit"), delId = btn.getAttribute("data-del");
+    if (editId) {
+      var t = state.custom.filter(function (c) { return c.id === editId; })[0];
+      if (!t) return;
+      editing = t.id;
+      chosenIcon = t.icon;
+      document.getElementById("taskName").value = t.label;
+      document.getElementById("ownIcon").value = ICONS.indexOf(t.icon) === -1 ? t.icon : "";
+      document.getElementById("formTitle").textContent = "Ändra syssla";
+      document.getElementById("taskSubmit").textContent = "Spara";
+      document.getElementById("taskCancel").hidden = false;
+      document.getElementById("formError").hidden = true;
+      renderIconGrid();
+      document.getElementById("taskForm").scrollIntoView({ behavior: "smooth", block: "center" });
+    } else if (delId) {
+      if (deleteArmed !== delId) {
+        deleteArmed = delId; clearTimeout(deleteTimer);
+        deleteTimer = setTimeout(function () { deleteArmed = null; renderSettings(); }, 3500);
+        renderSettings();
+        return;
+      }
+      clearTimeout(deleteTimer); deleteArmed = null;
+      state.custom = state.custom.filter(function (c) { return c.id !== delId; });
+      KIDS.forEach(function (k) {
+        state.plan[k.id] = state.plan[k.id].filter(function (id) { return id !== delId; });
+        state.done[k.id] = state.done[k.id].filter(function (id) { return id !== delId; });
+      });
+      if (editing === delId) resetForm();
+      save(); render(); renderSettings();
+    }
+  });
+  document.getElementById("iconGrid").addEventListener("click", function (e) {
+    var btn = e.target.closest("button[data-icon]");
+    if (!btn) return;
+    chosenIcon = btn.getAttribute("data-icon");
+    document.getElementById("ownIcon").value = "";
+    renderIconGrid();
+  });
+  document.getElementById("ownIcon").addEventListener("input", function (e) {
+    var v = e.target.value.trim();
+    // Behåll bara första tecknet/emojin
+    if (v) {
+      var first = Array.from(v)[0];
+      var m = v.match(/^(\p{Extended_Pictographic}(️|‍\p{Extended_Pictographic}|[\u{1F3FB}-\u{1F3FF}])*)/u);
+      chosenIcon = m ? m[1] : first;
+    } else {
+      chosenIcon = ICONS[0];
+    }
+    renderIconGrid();
+  });
+  document.getElementById("taskCancel").addEventListener("click", resetForm);
+  document.getElementById("taskForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var label = document.getElementById("taskName").value.trim();
+    if (!label) { showError("Skriv ett namn på sysslan först."); document.getElementById("taskName").focus(); return; }
+    if (editing) {
+      state.custom.forEach(function (c) { if (c.id === editing) { c.label = label; c.icon = chosenIcon; } });
+    } else {
+      var id = "c" + Date.now().toString(36);
+      state.custom.push({ id: id, icon: chosenIcon, label: label });
+      KIDS.forEach(function (k) { state.plan[k.id].push(id); });
+    }
+    save(); render(); resetForm(); renderSettings();
+    tones([659, 880], 0.08);
   });
   document.getElementById("speakToggle").addEventListener("change", function (e) {
     state.speak = e.target.checked; save();
