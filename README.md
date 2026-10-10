@@ -10,6 +10,6 @@ Ett morgonspel för Sigge och Charlie. Varje avbockad syssla (toa, kläder, fruk
 
 ## Bra att veta
 - Allt sparas lokalt i webbläsaren. Listan nollställs automatiskt vid ny dag, eller med "Ny morgon".
-- Under "Inställningar" byter du namn på figurerna, väljer vilka sysslor respektive barn ska göra och lägger till egna sysslor med valfri ikon (från listan eller en egen emoji).
+- Under "Inställningar" väljer du vilka spelare som är med (1–3: Sigge, Charlie och Gustav), byter namn på dem, väljer vilka sysslor respektive barn ska göra och lägger till egna sysslor med valfri ikon (från listan eller en egen emoji).
 - Ljud och uppläst beröm (svensk röst) kan stängas av.
 - Hela appen är en enda fil: `index.html`. Inga beroenden.
