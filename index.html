@@ -31,6 +31,10 @@
   --charlie-soft: #d3f2ee;
   --gustav: #a0622d;
   --gustav-soft: #f3e1cc;
+  --leo: #2e6fbf;
+  --leo-soft: #dbe8fb;
+  --jacob: #4f9a2f;
+  --jacob-soft: #e1f2d4;
   --done: #4caf50;
   --font-display: "Baloo 2", "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
   --font-body: "Nunito", "Avenir Next", system-ui, sans-serif;
@@ -119,6 +123,8 @@ body {
 .stone.sigge.done { background: var(--sigge); border-color: #fff; }
 .stone.charlie.done { background: var(--charlie); border-color: #fff; }
 .stone.gustav.done { background: var(--gustav); border-color: #fff; }
+.stone.leo.done { background: var(--leo); border-color: #fff; }
+.stone.jacob.done { background: var(--jacob); border-color: #fff; }
 
 .kid {
   position: absolute;
@@ -145,8 +151,18 @@ body {
 .kid.sigge .tag { background: var(--sigge); }
 .kid.charlie .tag { background: var(--charlie); }
 .kid.gustav .tag { background: var(--gustav); }
+.kid.leo .tag { background: var(--leo); }
+.kid.jacob .tag { background: var(--jacob); }
 .scene.p3 .kid { width: 5.3%; }
 .scene.p3 .kid.small { width: 4.5%; }
+.scene.p4 .kid { width: 4.4%; }
+.scene.p4 .kid.small { width: 3.8%; }
+.scene.p5 .kid { width: 3.9%; }
+.scene.p5 .kid.small { width: 3.4%; }
+.scene.p4 .stone, .scene.p5 .stone { width: 2.1%; border-width: 2px; }
+.scene.p4 .kid .tag, .scene.p5 .kid .tag { font-size: clamp(.5rem, .95vw, 1rem); }
+/* Fler spelare: krymp scenen mer så att barnraderna får plats */
+.app.crowd .scene { width: min(100%, calc((100vh - 480px) * 2.78)); width: min(100%, calc((100dvh - 480px) * 2.78)); }
 .adult {
   position: absolute;
   width: 6.8%;
@@ -219,6 +235,8 @@ body {
 .board.sigge { border-color: var(--sigge-soft); }
 .board.charlie { border-color: var(--charlie-soft); }
 .board.gustav { border-color: var(--gustav-soft); }
+.board.leo { border-color: var(--leo-soft); }
+.board.jacob { border-color: var(--jacob-soft); }
 .board header { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .board h2 {
   margin: 0;
@@ -227,6 +245,8 @@ body {
 .board.sigge h2 { color: var(--sigge); }
 .board.charlie h2 { color: var(--charlie); }
 .board.gustav h2 { color: var(--gustav); }
+.board.leo h2 { color: var(--leo); }
+.board.jacob h2 { color: var(--jacob); }
 .count {
   font: 800 clamp(1rem, 1.6vw, 1.5rem) var(--font-display);
   color: var(--ink-soft);
@@ -281,6 +301,8 @@ body {
 .board.sigge .task.done { background: var(--sigge-soft); border-color: var(--sigge); }
 .board.charlie .task.done { background: var(--charlie-soft); border-color: var(--charlie); }
 .board.gustav .task.done { background: var(--gustav-soft); border-color: var(--gustav); }
+.board.leo .task.done { background: var(--leo-soft); border-color: var(--leo); }
+.board.jacob .task.done { background: var(--jacob-soft); border-color: var(--jacob); }
 .task.done .check { transform: scale(1); }
 .task.done .icon { transform: scale(.9); }
 
@@ -325,7 +347,9 @@ body {
 .settings th.sigge { color: var(--sigge); }
 .settings th.charlie { color: var(--charlie); }
 .settings th.gustav { color: var(--gustav); }
-.settings td:not(:first-child), .settings th:not(:first-child) { text-align: center; width: 17%; }
+.settings th.leo { color: var(--leo); }
+.settings th.jacob { color: var(--jacob); }
+.settings td:not(:first-child), .settings th:not(:first-child) { text-align: center; width: 4.6em; }
 .settings input[type=checkbox] { width: 26px; height: 26px; accent-color: var(--ink); }
 .settings .row { display: flex; gap: 10px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
 .settings .hint { font-size: .95rem; text-align: left; }
@@ -354,6 +378,8 @@ body {
 .player.sigge { border-color: var(--sigge-soft); }
 .player.charlie { border-color: var(--charlie-soft); }
 .player.gustav { border-color: var(--gustav-soft); }
+.player.leo { border-color: var(--leo-soft); }
+.player.jacob { border-color: var(--jacob-soft); }
 .player .who { font-size: .8rem; font-weight: 800; color: var(--ink-soft); display: block; margin-bottom: 2px; }
 .field {
   font: 800 1.15rem var(--font-body);
@@ -420,6 +446,18 @@ body {
 .boards.n1 { grid-template-columns: 1fr; }
 .boards.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .boards.n1 .tasks, .boards.n1 .tasks.many { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+.boards.n4, .boards.n5 { grid-template-columns: 1fr; gap: 8px; }
+.boards.n4 .board, .boards.n5 .board { flex-direction: row; align-items: center; padding: 6px 12px; gap: 12px; border-radius: 20px; }
+.boards.n4 .board header, .boards.n5 .board header { flex-direction: column; align-items: flex-start; gap: 0; width: 7.5em; flex: none; }
+.boards.n4 .board h2, .boards.n5 .board h2 { font-size: clamp(1.1rem, 1.8vw, 1.6rem); }
+.boards.n4 .count, .boards.n5 .count { font-size: .95rem; }
+.boards.n4 .tasks, .boards.n5 .tasks, .boards.n4 .tasks.many, .boards.n5 .tasks.many {
+  flex: 1; grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 6px;
+}
+.boards.n4 .task, .boards.n5 .task { padding: 4px 2px; border-radius: 14px; }
+.boards.n4 .task .icon, .boards.n5 .task .icon { font-size: clamp(1.5rem, 2.6vw, 2.3rem); }
+.boards.n4 .task .label, .boards.n5 .task .label { display: none; }
+.boards.n4 .task .check, .boards.n5 .task .check { width: 22px; top: -6px; right: -6px; font-size: .8rem; }
 .boards.n3 .tasks, .boards.n3 .tasks.many { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
 @media (max-width: 760px) {
   .boards.n1 .tasks, .boards.n1 .tasks.many { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -592,10 +630,12 @@ body {
     { id: "sigge",   name: "Sigge",   who: "Pikétröja", small: false, shirt: "#ff7a45", pants: "#3d5a80", hair: "#f2cf63", polo: true },
     { id: "charlie", name: "Charlie", who: "Grön keps", small: true,  shirt: "#3fb6a8", pants: "#7b5ea7", hair: "#f2cf63", cap: "#3fa34d" },
     { id: "gustav",  name: "Gustav",  who: "Brun keps med taggar", small: false, shirt: "#4f9d48", pants: "#2e6fbf", hair: "#6b4226",
-      cap: "#8a5a3b", spikes: "#5e3b1f", jacket: true, shoes: "#fff" }
+      cap: "#8a5a3b", spikes: "#5e3b1f", jacket: true, shoes: "#fff" },
+    { id: "leo",     name: "Leo",     who: "Blåvit randig tröja", small: false, shirt: "#fff", stripes: "#2e6fbf", pants: "#4a6fa5", hair: "#f2cf63", jeans: true },
+    { id: "jacob",   name: "Jacob",   who: "Grön tröja", small: true,  shirt: "#5bb04a", pants: "#8a5a3b", hair: "#f2cf63" }
   ];
   var ROAD_START = 15, ROAD_END = 84; // procent av scenens bredd
-  var LANES = { 1: [236], 2: [170, 290], 3: [150, 228, 306] }; // vägarnas mitt i scenens koordinater (0–360)
+  var LANES = { 1: [236], 2: [170, 290], 3: [150, 228, 306], 4: [146, 204, 262, 320], 5: [142, 188, 234, 280, 326] }; // vägarnas mitt i scenens koordinater (0–360)
   var PRAISE = ["Bra jobbat", "Snyggt", "Toppen", "Superbra", "Wow"];
   var STORE_KEY = "morgonvagen-v1";
   var ICONS = ["⭐","🛁","🚿","🧼","💊","🧴","💇","🪮","🧦","👖","👗","🩳","🧣","🥾","🎒","🍎","🥛","🍌","🥪","💧",
@@ -612,7 +652,7 @@ body {
       }).join("");
   }
   var SCENARIOS = [
-    { id: "forskola", icon: "🏫", title: "Vi går till förskolan", place: "framme vid förskolan", cheer: "Nu går vi!", people: ["sevgi", "susanne"],
+    { id: "forskola", icon: "🏫", title: "Vi går till förskolan", place: "framme vid förskolan", cheer: "Nu går vi!",
       svg: '<rect x="874" y="120" width="118" height="190" rx="10" fill="#fff3b0"/>' +
         '<path d="M864 126 L933 70 L1002 126 Z" fill="#4d96ff"/>' +
         '<line x1="933" y1="70" x2="933" y2="30" stroke="#2b3a55" stroke-width="3"/>' +
@@ -696,17 +736,18 @@ body {
     var d = new Date();
     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
   }
-  function emptyDone() { return { sigge: [], charlie: [], gustav: [] }; }
+  function defaultNames() { var n = {}; KIDS.forEach(function (k) { n[k.id] = k.name; }); return n; }
+  function emptyDone() { var d = {}; KIDS.forEach(function (k) { d[k.id] = []; }); return d; }
   function defaults() {
     var all = TASKS.map(function (t) { return t.id; });
     return {
       date: today(),
       done: emptyDone(),
-      plan: { sigge: all.slice(), charlie: all.slice(), gustav: all.slice() },
+      plan: (function () { var pl = {}; KIDS.forEach(function (k) { pl[k.id] = all.slice(); }); return pl; })(),
       players: ["sigge", "charlie"],
       sound: true,
       speak: true,
-      names: { sigge: "Sigge", charlie: "Charlie", gustav: "Gustav" },
+      names: defaultNames(),
       scenario: "forskola",
       custom: []
     };
@@ -716,7 +757,7 @@ body {
     var saved = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
     if (saved && saved.plan) state = Object.assign(defaults(), saved);
     if (!Array.isArray(state.custom)) state.custom = [];
-    state.names = Object.assign({ sigge: "Sigge", charlie: "Charlie", gustav: "Gustav" }, state.names);
+    state.names = Object.assign(defaultNames(), state.names);
     state.done = Object.assign(emptyDone(), state.done);
     // Nya figurer får alla sysslor som standard
     KIDS.forEach(function (k) {
@@ -756,6 +797,16 @@ body {
   }
 
   // ---------- Figurer ----------
+  function armSvg(k, side, x) {
+    var g = '<g class="arm ' + side + '"><rect x="' + x + '" y="44" width="8" height="26" rx="4" fill="' + k.shirt + '"' +
+      (k.stripes ? ' stroke="#d5dde8" stroke-width="1"' : '') + '/>';
+    if (k.stripes) {
+      g += '<rect x="' + (x + 0.5) + '" y="49" width="7" height="3.5" fill="' + k.stripes + '"/>' +
+        '<rect x="' + (x + 0.5) + '" y="57" width="7" height="3.5" fill="' + k.stripes + '"/>' +
+        '<rect x="' + (x + 0.5) + '" y="65" width="7" height="3" fill="' + k.stripes + '"/>';
+    }
+    return g + '<circle cx="' + (x + 4) + '" cy="69" r="3.6" fill="#ffd9b8"/></g>';
+  }
   function kidSvg(k) {
     return '<svg viewBox="0 0 60 104" aria-hidden="true"><g class="body-wrap">' +
       '<ellipse cx="30" cy="102" rx="18" ry="3" fill="rgba(0,0,0,.15)"/>' +
@@ -763,9 +814,14 @@ body {
         (k.shoes ? '<rect x="16" y="94" width="13" height="7" rx="3.5" fill="' + k.shoes + '" stroke="#c9ced6" stroke-width="1"/>' : '') + '</g>' +
       '<g class="leg r"><rect x="32" y="70" width="9" height="28" rx="4.5" fill="' + k.pants + '"/>' +
         (k.shoes ? '<rect x="31" y="94" width="13" height="7" rx="3.5" fill="' + k.shoes + '" stroke="#c9ced6" stroke-width="1"/>' : '') + '</g>' +
-      '<rect class="arm l" x="6" y="44" width="8" height="26" rx="4" fill="' + k.shirt + '"/>' +
-      '<rect class="arm r" x="46" y="44" width="8" height="26" rx="4" fill="' + k.shirt + '"/>' +
-      '<rect x="12" y="42" width="36" height="34" rx="12" fill="' + k.shirt + '"/>' +
+      (k.jeans ? '<path d="M23.5 74 V96 M36.5 74 V96" stroke="#7d9cc7" stroke-width="1" stroke-dasharray="2 2"/>' : '') +
+      armSvg(k, "l", 6) + armSvg(k, "r", 46) +
+      '<rect x="12" y="42" width="36" height="34" rx="12" fill="' + k.shirt + '"' + (k.stripes ? ' stroke="#d5dde8" stroke-width="1"' : '') + '/>' +
+      (k.stripes ?
+        '<clipPath id="torso-' + k.id + '"><rect x="12" y="42" width="36" height="34" rx="12"/></clipPath>' +
+        '<g clip-path="url(#torso-' + k.id + ')" fill="' + k.stripes + '">' +
+        '<rect x="10" y="47" width="40" height="4"/><rect x="10" y="55" width="40" height="4"/>' +
+        '<rect x="10" y="63" width="40" height="4"/><rect x="10" y="71" width="40" height="4"/></g>' : '') +
       (k.jacket ?
         '<path d="M30 44 V76" stroke="rgba(0,0,0,.28)" stroke-width="1.8"/>' +
         '<path d="M19 41 L30 47 L41 41 L40 46 L30 51 L20 46Z" fill="#3e8239"/>' +
@@ -799,43 +855,7 @@ body {
     scene.appendChild(el);
     kidEls[k.id] = el;
   });
-  var ADULTS = [
-    { id: "sevgi", name: "Sevgi", x: 88.8, svg:
-      '<svg viewBox="0 0 60 130" aria-hidden="true">' +
-      '<ellipse cx="30" cy="128" rx="20" ry="3" fill="rgba(0,0,0,.15)"/>' +
-      '<path d="M10 22 Q8 -2 30 0 Q52 -2 50 22 Q56 44 48 60 H12 Q4 44 10 22Z" fill="#1d1414"/>' +
-      '<rect x="20" y="90" width="9" height="36" rx="4.5" fill="#2b3a55"/><rect x="31" y="90" width="9" height="36" rx="4.5" fill="#2b3a55"/>' +
-      '<rect class="arm l" x="5" y="50" width="8" height="34" rx="4" fill="#8e44ad"/>' +
-      '<rect class="arm r" x="47" y="50" width="8" height="34" rx="4" fill="#8e44ad"/>' +
-      '<circle cx="9" cy="84" r="4" fill="#f6d2b8"/>' +
-      '<path d="M12 50 Q30 42 48 50 L52 96 H8 Z" fill="#8e44ad"/>' +
-      '<path d="M22 48 Q30 58 38 48" fill="#f6d2b8"/>' +
-      '<circle cx="30" cy="27" r="17" fill="#f6d2b8"/>' +
-      '<path d="M13 24 Q16 8 30 9 Q44 8 47 24 Q40 14 30 16 Q20 14 13 24Z" fill="#1d1414"/>' +
-      '<circle cx="19" cy="34" r="3" fill="#ff9e9e" opacity=".6"/><circle cx="41" cy="34" r="3" fill="#ff9e9e" opacity=".6"/>' +
-      '<circle cx="24" cy="28" r="2.4" fill="#1d1414"/><circle cx="36" cy="28" r="2.4" fill="#1d1414"/>' +
-      '<path d="M24 35 Q30 40 36 35" stroke="#2b3a55" stroke-width="2.2" fill="none" stroke-linecap="round"/>' +
-      '<circle cx="13" cy="33" r="2.2" fill="#ffc93c"/><circle cx="47" cy="33" r="2.2" fill="#ffc93c"/>' +
-      '</svg>' },
-    { id: "susanne", name: "Susanne", x: 96.2, svg:
-      '<svg viewBox="0 0 60 130" aria-hidden="true">' +
-      '<ellipse cx="30" cy="128" rx="20" ry="3" fill="rgba(0,0,0,.15)"/>' +
-      '<rect x="20" y="90" width="9" height="36" rx="4.5" fill="#5b4a3a"/><rect x="31" y="90" width="9" height="36" rx="4.5" fill="#5b4a3a"/>' +
-      '<rect class="arm l" x="5" y="50" width="8" height="34" rx="4" fill="#3d7ea6"/>' +
-      '<rect class="arm r" x="47" y="50" width="8" height="34" rx="4" fill="#3d7ea6"/>' +
-      '<circle cx="9" cy="84" r="4" fill="#f3cfb3"/>' +
-      '<path d="M12 50 Q30 42 48 50 L50 96 H10 Z" fill="#3d7ea6"/>' +
-      '<path d="M24 48 L30 96 L36 48 Z" fill="#f4f1e8"/>' +
-      '<circle cx="30" cy="62" r="1.6" fill="#fff"/><circle cx="30" cy="74" r="1.6" fill="#fff"/>' +
-      '<path d="M11 26 Q10 6 30 6 Q50 6 49 26 L50 46 Q44 48 42 40 L18 40 Q16 48 10 46Z" fill="#cfd3d8"/>' +
-      '<circle cx="30" cy="27" r="16" fill="#f3cfb3"/>' +
-      '<path d="M13 26 Q14 9 30 10 Q46 9 47 26 Q42 16 33 17 Q22 15 13 26Z" fill="#cfd3d8"/>' +
-      '<circle cx="24" cy="28" r="2.3" fill="#2b3a55"/><circle cx="36" cy="28" r="2.3" fill="#2b3a55"/>' +
-      '<circle cx="19" cy="34" r="3" fill="#ff9e9e" opacity=".6"/><circle cx="41" cy="34" r="3" fill="#ff9e9e" opacity=".6"/>' +
-      '<path d="M24 35 Q30 40 36 35" stroke="#2b3a55" stroke-width="2.2" fill="none" stroke-linecap="round"/>' +
-      '<path d="M20 22 Q22 20 24 22 M36 22 Q38 20 40 22" stroke="#b9886a" stroke-width="1" fill="none"/>' +
-      '</svg>' }
-  ];
+  var ADULTS = [];
   ADULTS.push(
     { id: "farmor", name: "Farmor", x: 88.8, svg:
       '<svg viewBox="0 0 60 130" aria-hidden="true">' +
@@ -907,7 +927,8 @@ body {
   var drawnLanes = 0;
   function renderScene() {
     var html = "", active = players(), lanes = LANES[active.length] || LANES[2];
-    scene.classList.remove("p1", "p2", "p3");
+    scene.classList.remove("p1", "p2", "p3", "p4", "p5");
+    document.querySelector(".app").classList.toggle("crowd", active.length >= 4);
     scene.classList.add("p" + active.length);
     if (drawnLanes !== active.length) {
       drawnLanes = active.length;

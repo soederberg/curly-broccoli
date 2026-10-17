@@ -1,6 +1,6 @@
 # Morgonvägen
 
-Ett morgonspel för Sigge och Charlie. Varje avbockad syssla (toa, kläder, frukost, tänder, overall, mössa, vantar, skor) flyttar figuren ett steg på vägen från det röda tegelhuset till målet. Målet väljs under Inställningar: förskolan (där pedagogerna Sevgi och Susanne väntar), lekplatsen i parken, skogen, mataffären, bilen eller farmor och farfar på landet. Solen går upp i takt med att sysslorna blir klara. När båda barnen är framme blir det fest.
+Ett morgonspel för Sigge, Charlie, Gustav, Leo och Jacob (1–5 spelare åt gången). Varje avbockad syssla (toa, kläder, frukost, tänder, overall, mössa, vantar, skor) flyttar figuren ett steg på vägen från det röda tegelhuset till målet. Målet väljs under Inställningar: förskolan, lekplatsen i parken, skogen, mataffären, bilen eller farmor och farfar på landet. Solen går upp i takt med att sysslorna blir klara. När alla är framme blir det fest.
 
 ## Så kör du den på TV:n
 1. Öppna sidan i Safari på iPad eller iPhone.
@@ -10,6 +10,6 @@ Ett morgonspel för Sigge och Charlie. Varje avbockad syssla (toa, kläder, fruk
 
 ## Bra att veta
 - Allt sparas lokalt i webbläsaren. Listan nollställs automatiskt vid ny dag, eller med "Ny morgon".
-- Under "Inställningar" väljer du vilka spelare som är med (1–3: Sigge, Charlie och Gustav), byter namn på dem, väljer vilka sysslor respektive barn ska göra och lägger till egna sysslor med valfri ikon (från listan eller en egen emoji).
+- Under "Inställningar" väljer du vilka spelare som är med (1–5), byter namn på dem, väljer vilka sysslor respektive barn ska göra och lägger till egna sysslor med valfri ikon (från listan eller en egen emoji).
 - Ljud och uppläst beröm (svensk röst) kan stängas av.
 - Hela appen är en enda fil: `index.html`. Inga beroenden.
