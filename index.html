@@ -336,7 +336,8 @@ body {
 .player.off { opacity: .5; }
 .player .avatar { width: 56px; display: grid; place-items: center; padding-top: 10px; }
 .player .avatar svg { width: 40px; height: auto; overflow: visible; }
-.player .on { display: flex; align-items: center; gap: 6px; font-weight: 800; cursor: pointer; }
+.player .on { display: flex; align-items: center; gap: 6px; font-weight: 800; cursor: pointer; white-space: nowrap; }
+.player .mini { justify-self: end; }
 .player { border-color: var(--cs); grid-template-columns: 56px minmax(0, 1fr) auto auto; }
 .player .pname { font: 800 1.2rem var(--font-display); color: var(--c); overflow-wrap: anywhere; }
 .add-kid { align-self: flex-start; }
@@ -472,7 +473,15 @@ body {
   .boards.n2, .boards.n3 { grid-template-columns: 1fr; }
   .builder .layout { grid-template-columns: 1fr; }
   .builder .preview { position: static; }
-  .player { grid-template-columns: 48px minmax(0, 1fr); }
+  .player {
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+    grid-template-areas: "av name name" "av on edit";
+    row-gap: 6px;
+  }
+  .player .avatar { grid-area: av; }
+  .player .pname { grid-area: name; }
+  .player .on { grid-area: on; }
+  .player .mini { grid-area: edit; }
   .stone { border-width: 2px; }
 }
 @media (prefers-reduced-motion: reduce) {
