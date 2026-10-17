@@ -25,16 +25,6 @@
   --ink-soft: #5b6b88;
   --paper: #fffdf6;
   --sun: #ffc93c;
-  --sigge: #ff7a45;
-  --sigge-soft: #ffe2d4;
-  --charlie: #3fb6a8;
-  --charlie-soft: #d3f2ee;
-  --gustav: #a0622d;
-  --gustav-soft: #f3e1cc;
-  --leo: #2e6fbf;
-  --leo-soft: #dbe8fb;
-  --jacob: #4f9a2f;
-  --jacob-soft: #e1f2d4;
   --done: #4caf50;
   --font-display: "Baloo 2", "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
   --font-body: "Nunito", "Avenir Next", system-ui, sans-serif;
@@ -119,12 +109,7 @@ body {
   transform: translate(-50%, -50%);
   transition: background .4s, border-color .4s, transform .4s;
 }
-.stone.done { transform: translate(-50%, -50%) scale(1.15); }
-.stone.sigge.done { background: var(--sigge); border-color: #fff; }
-.stone.charlie.done { background: var(--charlie); border-color: #fff; }
-.stone.gustav.done { background: var(--gustav); border-color: #fff; }
-.stone.leo.done { background: var(--leo); border-color: #fff; }
-.stone.jacob.done { background: var(--jacob); border-color: #fff; }
+.stone.done { transform: translate(-50%, -50%) scale(1.15); background: var(--c); border-color: #fff; }
 
 .kid {
   position: absolute;
@@ -137,6 +122,7 @@ body {
 .kid.small { width: 6.2%; }
 .kid svg { width: 100%; height: auto; display: block; overflow: visible; }
 .kid .tag {
+  background: var(--c);
   position: absolute;
   left: 50%;
   bottom: 100%;
@@ -148,11 +134,6 @@ body {
   white-space: nowrap;
   line-height: 1.5;
 }
-.kid.sigge .tag { background: var(--sigge); }
-.kid.charlie .tag { background: var(--charlie); }
-.kid.gustav .tag { background: var(--gustav); }
-.kid.leo .tag { background: var(--leo); }
-.kid.jacob .tag { background: var(--jacob); }
 .scene.p3 .kid { width: 5.3%; }
 .scene.p3 .kid.small { width: 4.5%; }
 .scene.p4 .kid { width: 4.4%; }
@@ -232,21 +213,11 @@ body {
   border: 4px solid transparent;
   min-width: 0;
 }
-.board.sigge { border-color: var(--sigge-soft); }
-.board.charlie { border-color: var(--charlie-soft); }
-.board.gustav { border-color: var(--gustav-soft); }
-.board.leo { border-color: var(--leo-soft); }
-.board.jacob { border-color: var(--jacob-soft); }
 .board header { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .board h2 {
   margin: 0;
   font: 800 clamp(1.5rem, 2.6vw, 2.4rem)/1 var(--font-display);
 }
-.board.sigge h2 { color: var(--sigge); }
-.board.charlie h2 { color: var(--charlie); }
-.board.gustav h2 { color: var(--gustav); }
-.board.leo h2 { color: var(--leo); }
-.board.jacob h2 { color: var(--jacob); }
 .count {
   font: 800 clamp(1rem, 1.6vw, 1.5rem) var(--font-display);
   color: var(--ink-soft);
@@ -298,13 +269,13 @@ body {
   transition: transform .35s cubic-bezier(.3,1.8,.5,1);
   box-shadow: 0 2px 0 rgba(0,0,0,.15);
 }
-.board.sigge .task.done { background: var(--sigge-soft); border-color: var(--sigge); }
-.board.charlie .task.done { background: var(--charlie-soft); border-color: var(--charlie); }
-.board.gustav .task.done { background: var(--gustav-soft); border-color: var(--gustav); }
-.board.leo .task.done { background: var(--leo-soft); border-color: var(--leo); }
-.board.jacob .task.done { background: var(--jacob-soft); border-color: var(--jacob); }
 .task.done .check { transform: scale(1); }
 .task.done .icon { transform: scale(.9); }
+
+.board { border-color: var(--cs); }
+.board h2 { color: var(--c); }
+.board .task.done { background: var(--cs); border-color: var(--c); }
+.settings th.kidcol { color: var(--c); }
 
 /* ---------- Firande & inställningar ---------- */
 #confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 20; }
@@ -344,21 +315,12 @@ body {
 .settings table { width: 100%; border-collapse: collapse; margin-block: 8px 18px; font-size: 1.05rem; }
 .settings th, .settings td { padding: 8px 6px; border-bottom: 1px solid rgba(43,58,85,.1); }
 .settings th { font-family: var(--font-display); font-size: 1.2rem; }
-.settings th.sigge { color: var(--sigge); }
-.settings th.charlie { color: var(--charlie); }
-.settings th.gustav { color: var(--gustav); }
-.settings th.leo { color: var(--leo); }
-.settings th.jacob { color: var(--jacob); }
 .settings td:not(:first-child), .settings th:not(:first-child) { text-align: center; width: 4.6em; }
 .settings input[type=checkbox] { width: 26px; height: 26px; accent-color: var(--ink); }
 .settings .row { display: flex; gap: 10px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
 .settings .hint { font-size: .95rem; text-align: left; }
 .settings h3 { margin: 18px 0 8px; font: 800 1.35rem var(--font-display); }
 .settings section + section { border-top: 2px dashed rgba(43,58,85,.12); margin-top: 14px; }
-.names { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.names label { display: flex; flex-direction: column; gap: 4px; font-weight: 800; min-width: 0; }
-.names label.sigge { color: var(--sigge); }
-.names label.charlie { color: var(--charlie); }
 .players { display: flex; flex-direction: column; gap: 10px; }
 .player {
   display: grid;
@@ -375,12 +337,56 @@ body {
 .player .avatar { width: 56px; display: grid; place-items: center; padding-top: 10px; }
 .player .avatar svg { width: 40px; height: auto; overflow: visible; }
 .player .on { display: flex; align-items: center; gap: 6px; font-weight: 800; cursor: pointer; }
-.player.sigge { border-color: var(--sigge-soft); }
-.player.charlie { border-color: var(--charlie-soft); }
-.player.gustav { border-color: var(--gustav-soft); }
-.player.leo { border-color: var(--leo-soft); }
-.player.jacob { border-color: var(--jacob-soft); }
-.player .who { font-size: .8rem; font-weight: 800; color: var(--ink-soft); display: block; margin-bottom: 2px; }
+.player { border-color: var(--cs); grid-template-columns: 56px minmax(0, 1fr) auto auto; }
+.player .pname { font: 800 1.2rem var(--font-display); color: var(--c); overflow-wrap: anywhere; }
+.add-kid { align-self: flex-start; }
+.share { display: flex; flex-direction: column; gap: 8px; }
+.share .line { display: flex; gap: 8px; flex-wrap: wrap; }
+.share .line .field { flex: 1 1 220px; font-size: .9rem; }
+.builder { text-align: left; max-width: min(820px, 100%); }
+.builder .layout { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 20px; align-items: start; }
+.builder .preview {
+  position: sticky; top: 0;
+  background: linear-gradient(180deg, #cdeefa, #e9f7d8);
+  border-radius: 22px;
+  display: grid; place-items: center;
+  padding: 26px 10px 10px;
+}
+.builder .preview svg { width: 120px; height: auto; overflow: visible; }
+.builder .preview.small svg { width: 100px; }
+.builder .opts, #builderOpts { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.opt-label { font: 800 .95rem var(--font-body); margin: 0 0 4px; color: var(--ink-soft); }
+.builder .opt-label, .builder p.opt-label { margin: 0 0 6px; font-size: .95rem; text-align: left; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button {
+  font: 800 .95rem var(--font-body);
+  color: var(--ink);
+  background: #fff;
+  border: 3px solid rgba(43,58,85,.12);
+  border-radius: 999px;
+  padding: .3em .8em;
+  cursor: pointer;
+}
+.chips button[aria-pressed="true"] { border-color: var(--ink); background: #ffe08a; }
+.swatches { display: flex; flex-wrap: wrap; gap: 6px; }
+.swatches button {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 3px solid rgba(43,58,85,.18);
+  cursor: pointer;
+  padding: 0;
+}
+.swatches button[aria-pressed="true"] { border-color: var(--ink); box-shadow: 0 0 0 3px #ffe08a; }
+.chips button:focus-visible, .swatches button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.builder .actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between; margin-top: 18px; }
+.builder .actions .right { display: flex; gap: 10px; flex-wrap: wrap; }
+.big-btn.danger { background: #fff; color: #c0392b; box-shadow: 0 5px 0 rgba(192,57,43,.25); }
+.big-btn.danger.warn { background: #ffe08a; }
+.welcome .kids-row { display: flex; justify-content: center; gap: 6px; margin: 4px 0 16px; }
+.welcome .kids-row svg { width: 64px; height: auto; }
+#settings, #party { z-index: 15; }
+#builder { z-index: 17; }
+#welcome, #importBox { z-index: 18; }
 .field {
   font: 800 1.15rem var(--font-body);
   color: var(--ink);
@@ -464,6 +470,9 @@ body {
   .boards { grid-template-columns: 1fr; }
   .names { grid-template-columns: 1fr; }
   .boards.n2, .boards.n3 { grid-template-columns: 1fr; }
+  .builder .layout { grid-template-columns: 1fr; }
+  .builder .preview { position: static; }
+  .player { grid-template-columns: 48px minmax(0, 1fr); }
   .stone { border-width: 2px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -574,9 +583,24 @@ body {
       <div class="scenarios" id="scenarioGrid" role="group" aria-label="Välj scenario"></div>
     </section>
     <section>
-      <h3>Spelare</h3>
-      <p class="hint">Välj vilka som är med idag och vad de heter.</p>
+      <h3>Barnen</h3>
+      <p class="hint">Skapa barnen i familjen (högst 4). Bocka ur "Med idag" för den som inte är med.</p>
       <div class="players" id="playerRows"></div>
+      <button class="mini add-kid" id="addKid" type="button">＋ Lägg till barn</button>
+    </section>
+    <section>
+      <h3>Dela familjen</h3>
+      <div class="share">
+        <p class="hint">Skapa en länk med barnen och sysslorna. Den som öppnar länken får samma uppsättning på sin enhet.</p>
+        <div class="line">
+          <button class="mini" id="shareMake" type="button">🔗 Skapa länk</button>
+        </div>
+        <div class="line" id="shareOut" hidden>
+          <input class="field" id="shareLink" readonly aria-label="Delningslänk">
+          <button class="mini" id="shareCopy" type="button">Kopiera</button>
+        </div>
+        <p class="hint" id="shareMsg" hidden></p>
+      </div>
     </section>
     <section>
       <h3>Sysslor</h3>
@@ -612,6 +636,48 @@ body {
   </div>
 </div>
 
+<div class="overlay" id="builder" hidden>
+  <div class="panel builder">
+    <h2 id="builderTitle">Nytt barn</h2>
+    <div class="layout">
+      <div class="preview" id="builderPreview"></div>
+      <div class="opts">
+        <label class="opt-label" for="bName">Namn</label>
+        <input class="field" id="bName" maxlength="16" autocomplete="off" placeholder="Barnets namn">
+        <div id="builderOpts"></div>
+        <p class="error" id="builderError" hidden></p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="big-btn danger" id="bDelete" type="button" hidden>Ta bort barnet</button>
+      <div class="right">
+        <button class="big-btn ghost" id="bCancel" type="button">Avbryt</button>
+        <button class="big-btn" id="bSave" type="button">Spara</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="welcome" hidden>
+  <div class="panel welcome">
+    <div class="kids-row" id="welcomeKids" aria-hidden="true"></div>
+    <h2>Välkommen till Morgonvägen!</h2>
+    <p>Varje syssla på morgonen tar barnen ett steg närmare målet. Börja med att skapa barnen. Allt går att ändra senare under Inställningar.</p>
+    <button class="big-btn" id="welcomeStart" type="button">Skapa första barnet</button>
+  </div>
+</div>
+
+<div class="overlay" id="importBox" hidden>
+  <div class="panel">
+    <h2>Ny familj?</h2>
+    <p id="importText"></p>
+    <div class="form-actions" style="justify-content:center">
+      <button class="big-btn" id="importYes" type="button">Använd länken</button>
+      <button class="big-btn ghost" id="importNo" type="button">Behåll mina</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function () {
   "use strict";
@@ -626,16 +692,41 @@ body {
     { id: "vantar",  icon: "🧤", label: "Vantar",        say: "vantarna är på" },
     { id: "skor",    icon: "👟", label: "Skor",          say: "skorna är på" }
   ];
-  var KIDS = [
-    { id: "sigge",   name: "Sigge",   who: "Pikétröja", small: false, shirt: "#ff7a45", pants: "#3d5a80", hair: "#f2cf63", polo: true },
-    { id: "charlie", name: "Charlie", who: "Grön keps", small: true,  shirt: "#3fb6a8", pants: "#7b5ea7", hair: "#f2cf63", cap: "#3fa34d" },
-    { id: "gustav",  name: "Gustav",  who: "Brun keps med taggar", small: false, shirt: "#4f9d48", pants: "#2e6fbf", hair: "#6b4226",
-      cap: "#8a5a3b", spikes: "#5e3b1f", jacket: true, shoes: "#fff" },
-    { id: "leo",     name: "Leo",     who: "Blåvit randig tröja", small: false, shirt: "#fff", stripes: "#2e6fbf", pants: "#4a6fa5", hair: "#f2cf63", jeans: true },
-    { id: "jacob",   name: "Jacob",   who: "Grön tröja", small: true,  shirt: "#5bb04a", pants: "#8a5a3b", hair: "#f2cf63" }
+  var MAX_KIDS = 4;
+  // Utseende-alternativ i figurbyggaren
+  var SKINS = ["#ffe3cc", "#f6d2b8", "#e8b48f", "#c68a5e", "#8d5a3b", "#5e3a24"];
+  var HAIRS = ["#f2cf63", "#d9a441", "#b07a45", "#6b4226", "#2a1c17", "#c8552a", "#cfd3d8"];
+  var COLORS = ["#ff7a45", "#e63946", "#ff8fb1", "#ffc93c", "#5bb04a", "#3fb6a8", "#2e6fbf", "#7b5ea7", "#8a5a3b", "#ffffff", "#2b3a55"];
+  var PANTS = ["#4a6fa5", "#3d5a80", "#2b3a55", "#8a5a3b", "#c9b38a", "#7b5ea7", "#3e8239", "#ff8fb1", "#9aa0a8"];
+  var SHOES = ["#ffffff", "#2b3a55", "#e63946", "#2e6fbf", "#ff8fb1", "#ffc93c"];
+  var OPTIONS = [
+    { key: "size", label: "Storlek", chips: [["big", "Stor"], ["small", "Liten"]] },
+    { key: "skin", label: "Hud", swatches: SKINS },
+    { key: "hairStyle", label: "Frisyr", chips: [["short", "Kort"], ["long", "Långt"], ["pigtails", "Tofsar"]] },
+    { key: "hair", label: "Hårfärg", swatches: HAIRS },
+    { key: "top", label: "Tröja", chips: [["tshirt", "T-shirt"], ["polo", "Piké"], ["stripes", "Randig"], ["jacket", "Jacka"]] },
+    { key: "topColor", label: "Tröjans färg", swatches: COLORS },
+    { key: "stripeColor", label: "Rändernas färg", swatches: COLORS, when: function (k) { return k.top === "stripes"; } },
+    { key: "pants", label: "Byxor", swatches: PANTS },
+    { key: "hat", label: "Huvudbonad", chips: [["none", "Ingen"], ["cap", "Keps"], ["spikecap", "Keps med taggar"], ["beanie", "Mössa"]] },
+    { key: "hatColor", label: "Huvudbonadens färg", swatches: COLORS, when: function (k) { return k.hat !== "none"; } },
+    { key: "shoes", label: "Skor", swatches: SHOES }
   ];
+  function newKid() {
+    return { id: "k" + Date.now().toString(36) + Math.floor(Math.random() * 1000), name: "", size: "big", skin: SKINS[1],
+      hairStyle: "short", hair: HAIRS[0], top: "tshirt", topColor: COLORS[0], stripeColor: "#ffffff", pants: PANTS[0],
+      hat: "none", hatColor: COLORS[6], shoes: SHOES[1], off: false };
+  }
+  // Figurer från tidigare versioner – används bara för att flytta över gamla inställningar
+  var LEGACY = {
+    sigge:   { name: "Sigge",   size: "big",   hair: "#f2cf63", top: "polo",    topColor: "#ff7a45", pants: "#3d5a80", hat: "none" },
+    charlie: { name: "Charlie", size: "small", hair: "#f2cf63", top: "tshirt",  topColor: "#3fb6a8", pants: "#7b5ea7", hat: "cap", hatColor: "#3fa34d" },
+    gustav:  { name: "Gustav",  size: "big",   hair: "#6b4226", top: "jacket",  topColor: "#4f9d48", pants: "#2e6fbf", hat: "spikecap", hatColor: "#8a5a3b", shoes: "#ffffff" },
+    leo:     { name: "Leo",     size: "big",   hair: "#f2cf63", top: "stripes", topColor: "#ffffff", stripeColor: "#2e6fbf", pants: "#4a6fa5", hat: "none" },
+    jacob:   { name: "Jacob",   size: "small", hair: "#f2cf63", top: "tshirt",  topColor: "#5bb04a", pants: "#8a5a3b", hat: "none" }
+  };
   var ROAD_START = 15, ROAD_END = 84; // procent av scenens bredd
-  var LANES = { 1: [236], 2: [170, 290], 3: [150, 228, 306], 4: [146, 204, 262, 320], 5: [142, 188, 234, 280, 326] }; // vägarnas mitt i scenens koordinater (0–360)
+  var LANES = { 1: [236], 2: [170, 290], 3: [150, 228, 306], 4: [146, 204, 262, 320] }; // vägarnas mitt i scenens koordinater (0–360)
   var PRAISE = ["Bra jobbat", "Snyggt", "Toppen", "Superbra", "Wow"];
   var STORE_KEY = "morgonvagen-v1";
   var ICONS = ["⭐","🛁","🚿","🧼","💊","🧴","💇","🪮","🧦","👖","👗","🩳","🧣","🥾","🎒","🍎","🥛","🍌","🥪","💧",
@@ -736,54 +827,66 @@ body {
     var d = new Date();
     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
   }
-  function defaultNames() { var n = {}; KIDS.forEach(function (k) { n[k.id] = k.name; }); return n; }
-  function emptyDone() { var d = {}; KIDS.forEach(function (k) { d[k.id] = []; }); return d; }
   function defaults() {
-    var all = TASKS.map(function (t) { return t.id; });
-    return {
-      date: today(),
-      done: emptyDone(),
-      plan: (function () { var pl = {}; KIDS.forEach(function (k) { pl[k.id] = all.slice(); }); return pl; })(),
-      players: ["sigge", "charlie"],
-      sound: true,
-      speak: true,
-      names: defaultNames(),
-      scenario: "forskola",
-      custom: []
-    };
+    return { date: today(), done: {}, plan: {}, kids: [], sound: true, speak: true, scenario: "forskola", custom: [] };
   }
+  function allTaskIds() { return TASKS.concat(state.custom).map(function (t) { return t.id; }); }
   var state = defaults();
   try {
     var saved = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
-    if (saved && saved.plan) state = Object.assign(defaults(), saved);
+    if (saved) state = Object.assign(defaults(), saved);
     if (!Array.isArray(state.custom)) state.custom = [];
-    state.names = Object.assign(defaultNames(), state.names);
-    state.done = Object.assign(emptyDone(), state.done);
-    // Nya figurer får alla sysslor som standard
-    KIDS.forEach(function (k) {
-      if (!Array.isArray(state.plan[k.id]))
-        state.plan[k.id] = TASKS.concat(state.custom).map(function (t) { return t.id; });
-    });
-    if (!Array.isArray(state.players) || !state.players.length) state.players = ["sigge", "charlie"];
-  } catch (e) {}
+    if (!state.plan) state.plan = {};
+    if (!state.done) state.done = {};
+    // Flytta över från versionen med fasta figurer
+    if (saved && !Array.isArray(saved.kids)) {
+      state.kids = (Array.isArray(saved.players) ? saved.players : ["sigge", "charlie"])
+        .filter(function (id) { return LEGACY[id]; })
+        .slice(0, MAX_KIDS)
+        .map(function (id) {
+          var k = Object.assign(newKid(), LEGACY[id], { id: id });
+          if (saved.names && saved.names[id] && saved.names[id].trim()) k.name = saved.names[id].trim();
+          return k;
+        });
+      delete state.players; delete state.names;
+    }
+  } catch (e) { state = defaults(); }
+  state.kids.forEach(function (k) {
+    if (!Array.isArray(state.plan[k.id])) state.plan[k.id] = allTaskIds();
+    if (!Array.isArray(state.done[k.id])) state.done[k.id] = [];
+  });
   function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {} }
   function newMorningIfNeeded() {
-    if (state.date !== today()) { state.date = today(); state.done = emptyDone(); save(); }
+    if (state.date !== today()) { state.date = today(); state.done = {}; save(); }
   }
   newMorningIfNeeded();
 
-  function kidById(id) { return KIDS.filter(function (k) { return k.id === id; })[0]; }
-  function nm(kid) { return (state.names[kid] || "").trim() || kidById(kid).name; }
-  function players() { return KIDS.filter(function (k) { return state.players.indexOf(k.id) !== -1; }); }
+  function nm(k) { return (k.name || "").trim() || "Barnet"; }
+  function players() { return state.kids.filter(function (k) { return !k.off; }); }
+  function doneList(id) { if (!Array.isArray(state.done[id])) state.done[id] = []; return state.done[id]; }
   function joinNames(list) {
-    var n = list.map(function (k) { return nm(k.id); });
+    var n = list.map(nm);
     return n.length < 2 ? n.join("") : n.slice(0, -1).join(", ") + " och " + n[n.length - 1];
   }
+  // Färg för namnskylt, kort och stenar: tröjfärgen, mörkad om den är för ljus
+  function hexRgb(h) { h = h.replace("#", ""); return [0, 2, 4].map(function (i) { return parseInt(h.substr(i, 2), 16); }); }
+  function mix(h, to, t) {
+    var a = hexRgb(h), b = hexRgb(to);
+    return "#" + a.map(function (v, i) { return ("0" + Math.round(v + (b[i] - v) * t).toString(16)).slice(-2); }).join("");
+  }
+  function lum(h) { var c = hexRgb(h); return (0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]) / 255; }
+  function accent(k) {
+    var c = k.top === "stripes" && lum(k.topColor) > 0.8 ? k.stripeColor : k.topColor;
+    if (lum(c) > 0.8) c = k.pants;
+    if (lum(c) > 0.62) c = mix(c, "#2b3a55", 0.35);
+    return c;
+  }
+  function colorVars(k) { var c = accent(k); return "--c:" + c + ";--cs:" + mix(c, "#ffffff", 0.82); }
   function allTasks() { return TASKS.concat(state.custom); }
-  function planFor(kid) { return allTasks().filter(function (t) { return state.plan[kid].indexOf(t.id) !== -1; }); }
+  function planFor(kid) { var p = state.plan[kid] || []; return allTasks().filter(function (t) { return p.indexOf(t.id) !== -1; }); }
   function doneCount(kid) {
-    var p = state.plan[kid];
-    return state.done[kid].filter(function (id) { return p.indexOf(id) !== -1; }).length;
+    var p = state.plan[kid] || [];
+    return doneList(kid).filter(function (id) { return p.indexOf(id) !== -1; }).length;
   }
   function isFinished(kid) { var n = planFor(kid).length; return n > 0 && doneCount(kid) >= n; }
 
@@ -797,49 +900,66 @@ body {
   }
 
   // ---------- Figurer ----------
+  function shade(h, t) { return mix(h, t < 0 ? "#000000" : "#ffffff", Math.abs(t)); }
   function armSvg(k, side, x) {
-    var g = '<g class="arm ' + side + '"><rect x="' + x + '" y="44" width="8" height="26" rx="4" fill="' + k.shirt + '"' +
-      (k.stripes ? ' stroke="#d5dde8" stroke-width="1"' : '') + '/>';
-    if (k.stripes) {
-      g += '<rect x="' + (x + 0.5) + '" y="49" width="7" height="3.5" fill="' + k.stripes + '"/>' +
-        '<rect x="' + (x + 0.5) + '" y="57" width="7" height="3.5" fill="' + k.stripes + '"/>' +
-        '<rect x="' + (x + 0.5) + '" y="65" width="7" height="3" fill="' + k.stripes + '"/>';
+    var light = lum(k.topColor) > 0.85;
+    var g = '<g class="arm ' + side + '"><rect x="' + x + '" y="44" width="8" height="26" rx="4" fill="' + k.topColor + '"' +
+      (light ? ' stroke="#d5dde8" stroke-width="1"' : '') + '/>';
+    if (k.top === "stripes") {
+      [49, 57, 65].forEach(function (y) {
+        g += '<rect x="' + (x + 0.5) + '" y="' + y + '" width="7" height="3.5" fill="' + k.stripeColor + '"/>';
+      });
     }
-    return g + '<circle cx="' + (x + 4) + '" cy="69" r="3.6" fill="#ffd9b8"/></g>';
+    return g + '<circle cx="' + (x + 4) + '" cy="69" r="3.6" fill="' + k.skin + '"/></g>';
   }
-  function kidSvg(k) {
+  function kidSvg(k, uid) {
+    var top = k.topColor, light = lum(top) > 0.85, clip = "torso-" + (uid || k.id);
+    var shoe = function (x) {
+      return '<rect x="' + x + '" y="94" width="13" height="7" rx="3.5" fill="' + k.shoes + '"' +
+        (lum(k.shoes) > 0.85 ? ' stroke="#c9ced6" stroke-width="1"' : '') + '/>';
+    };
+    var hat = "";
+    if (k.hat === "cap" || k.hat === "spikecap") {
+      hat = '<path d="M10 19 Q11 1 30 1 Q49 1 50 19 Z" fill="' + k.hatColor + '"/>' +
+        '<path d="M40 17 Q56 14 62 20 Q56 23 40 21Z" fill="' + k.hatColor + '" stroke="rgba(0,0,0,.18)" stroke-width="1"/>' +
+        '<path d="M30 1 V18" stroke="rgba(0,0,0,.15)" stroke-width="1.4"/>' +
+        (k.hat === "spikecap" ?
+          '<path d="M19 6 L21 -3 L24 4 L26.5 -6 L29 2 L31.5 -7 L34 2 L36.5 -5 L39 4 L41 -2 L42 7 Z" fill="' + shade(k.hatColor, -0.35) + '"/>' :
+          '<circle cx="30" cy="2" r="2.6" fill="' + k.hatColor + '" stroke="rgba(0,0,0,.18)" stroke-width="1"/>');
+    } else if (k.hat === "beanie") {
+      hat = '<path d="M10 21 Q10 -1 30 -1 Q50 -1 50 21 Z" fill="' + k.hatColor + '"/>' +
+        '<rect x="9" y="14" width="42" height="9" rx="4.5" fill="' + shade(k.hatColor, -0.18) + '"/>' +
+        '<circle cx="30" cy="-3" r="5.5" fill="' + shade(k.hatColor, 0.45) + '"/>';
+    }
     return '<svg viewBox="0 0 60 104" aria-hidden="true"><g class="body-wrap">' +
       '<ellipse cx="30" cy="102" rx="18" ry="3" fill="rgba(0,0,0,.15)"/>' +
-      '<g class="leg l"><rect x="19" y="70" width="9" height="28" rx="4.5" fill="' + k.pants + '"/>' +
-        (k.shoes ? '<rect x="16" y="94" width="13" height="7" rx="3.5" fill="' + k.shoes + '" stroke="#c9ced6" stroke-width="1"/>' : '') + '</g>' +
-      '<g class="leg r"><rect x="32" y="70" width="9" height="28" rx="4.5" fill="' + k.pants + '"/>' +
-        (k.shoes ? '<rect x="31" y="94" width="13" height="7" rx="3.5" fill="' + k.shoes + '" stroke="#c9ced6" stroke-width="1"/>' : '') + '</g>' +
-      (k.jeans ? '<path d="M23.5 74 V96 M36.5 74 V96" stroke="#7d9cc7" stroke-width="1" stroke-dasharray="2 2"/>' : '') +
+      (k.hairStyle === "long" ? '<path d="M9 24 Q8 3 30 3 Q52 3 51 24 L52 52 Q46 54 43 46 L17 46 Q14 54 8 52Z" fill="' + k.hair + '"/>' : '') +
+      (k.hairStyle === "pigtails" ?
+        '<circle cx="7" cy="27" r="7" fill="' + k.hair + '"/><circle cx="53" cy="27" r="7" fill="' + k.hair + '"/>' +
+        '<circle cx="11" cy="24" r="2.4" fill="#ff8fb1"/><circle cx="49" cy="24" r="2.4" fill="#ff8fb1"/>' : '') +
+      '<g class="leg l"><rect x="19" y="70" width="9" height="28" rx="4.5" fill="' + k.pants + '"/>' + shoe(16) + '</g>' +
+      '<g class="leg r"><rect x="32" y="70" width="9" height="28" rx="4.5" fill="' + k.pants + '"/>' + shoe(31) + '</g>' +
       armSvg(k, "l", 6) + armSvg(k, "r", 46) +
-      '<rect x="12" y="42" width="36" height="34" rx="12" fill="' + k.shirt + '"' + (k.stripes ? ' stroke="#d5dde8" stroke-width="1"' : '') + '/>' +
-      (k.stripes ?
-        '<clipPath id="torso-' + k.id + '"><rect x="12" y="42" width="36" height="34" rx="12"/></clipPath>' +
-        '<g clip-path="url(#torso-' + k.id + ')" fill="' + k.stripes + '">' +
+      '<rect x="12" y="42" width="36" height="34" rx="12" fill="' + top + '"' + (light ? ' stroke="#d5dde8" stroke-width="1"' : '') + '/>' +
+      (k.top === "stripes" ?
+        '<clipPath id="' + clip + '"><rect x="12" y="42" width="36" height="34" rx="12"/></clipPath>' +
+        '<g clip-path="url(#' + clip + ')" fill="' + k.stripeColor + '">' +
         '<rect x="10" y="47" width="40" height="4"/><rect x="10" y="55" width="40" height="4"/>' +
         '<rect x="10" y="63" width="40" height="4"/><rect x="10" y="71" width="40" height="4"/></g>' : '') +
-      (k.jacket ?
+      (k.top === "jacket" ?
         '<path d="M30 44 V76" stroke="rgba(0,0,0,.28)" stroke-width="1.8"/>' +
-        '<path d="M19 41 L30 47 L41 41 L40 46 L30 51 L20 46Z" fill="#3e8239"/>' +
+        '<path d="M19 41 L30 47 L41 41 L40 46 L30 51 L20 46Z" fill="' + shade(top, -0.2) + '"/>' +
         '<path d="M17 62 H24 M36 62 H43" stroke="rgba(0,0,0,.22)" stroke-width="1.6" stroke-linecap="round"/>' : '') +
-      (k.polo ?
-        '<path d="M22 42 L30 50 L24 54 L18 44Z" fill="#fff"/><path d="M38 42 L30 50 L36 54 L42 44Z" fill="#fff"/>' +
+      (k.top === "polo" ?
+        '<path d="M22 42 L30 50 L24 54 L18 44Z" fill="' + (light ? "#e3e8ef" : "#fff") + '"/>' +
+        '<path d="M38 42 L30 50 L36 54 L42 44Z" fill="' + (light ? "#e3e8ef" : "#fff") + '"/>' +
         '<rect x="28.6" y="50" width="2.8" height="12" rx="1.4" fill="rgba(0,0,0,.15)"/>' +
         '<circle cx="30" cy="54" r="1.6" fill="#fff"/><circle cx="30" cy="59" r="1.6" fill="#fff"/>' : '') +
-      '<circle cx="30" cy="24" r="19" fill="#ffd9b8"/>' +
+      '<circle cx="30" cy="24" r="19" fill="' + k.skin + '"/>' +
       '<path d="M11 22 Q12 4 30 4 Q48 4 49 22 Q40 12 30 14 Q20 12 11 22Z" fill="' + k.hair + '"/>' +
-      (k.cap ?
-        '<path d="M10 25 Q9 18 13 16 L15 27Z M50 25 Q51 18 47 16 L45 27Z" fill="' + k.hair + '"/>' +
-        '<path d="M10 19 Q11 1 30 1 Q49 1 50 19 Z" fill="' + k.cap + '"/>' +
-        '<path d="M40 17 Q56 14 62 20 Q56 23 40 21Z" fill="' + k.cap + '" stroke="rgba(0,0,0,.18)" stroke-width="1"/>' +
-        '<path d="M30 1 V18" stroke="rgba(0,0,0,.15)" stroke-width="1.4"/>' +
-        (k.spikes ?
-          '<path d="M19 6 L21 -3 L24 4 L26.5 -6 L29 2 L31.5 -7 L34 2 L36.5 -5 L39 4 L41 -2 L42 7 Z" fill="' + k.spikes + '"/>' :
-          '<circle cx="30" cy="2" r="2.6" fill="' + k.cap + '" stroke="rgba(0,0,0,.18)" stroke-width="1"/>') : '') +
+      (k.hat === "cap" || k.hat === "spikecap" ?
+        '<path d="M10 25 Q9 18 13 16 L15 27Z M50 25 Q51 18 47 16 L45 27Z" fill="' + k.hair + '"/>' : '') +
+      hat +
       '<circle cx="23" cy="25" r="2.6" fill="#2b3a55"/><circle cx="37" cy="25" r="2.6" fill="#2b3a55"/>' +
       '<path d="M23 32 Q30 38 37 32" stroke="#2b3a55" stroke-width="2.4" fill="none" stroke-linecap="round"/>' +
       '<circle cx="18" cy="31" r="3" fill="#ff9e9e" opacity=".6"/><circle cx="42" cy="31" r="3" fill="#ff9e9e" opacity=".6"/>' +
@@ -848,13 +968,18 @@ body {
   var scene = document.getElementById("scene");
   var stonesEl = document.getElementById("stones");
   var kidEls = {};
-  KIDS.forEach(function (k) {
-    var el = document.createElement("div");
-    el.className = "kid " + k.id + (k.small ? " small" : "");
-    el.innerHTML = '<span class="tag"></span>' + kidSvg(k);
-    scene.appendChild(el);
-    kidEls[k.id] = el;
-  });
+  function rebuildKids() {
+    Object.keys(kidEls).forEach(function (id) { kidEls[id].remove(); });
+    kidEls = {};
+    state.kids.forEach(function (k) {
+      var el = document.createElement("div");
+      el.className = "kid" + (k.size === "small" ? " small" : "");
+      el.innerHTML = '<span class="tag"></span>' + kidSvg(k);
+      scene.appendChild(el);
+      kidEls[k.id] = el;
+    });
+  }
+  rebuildKids();
   var ADULTS = [];
   ADULTS.push(
     { id: "farmor", name: "Farmor", x: 88.8, svg:
@@ -926,8 +1051,8 @@ body {
 
   var drawnLanes = 0;
   function renderScene() {
-    var html = "", active = players(), lanes = LANES[active.length] || LANES[2];
-    scene.classList.remove("p1", "p2", "p3", "p4", "p5");
+    var html = "", active = players(), lanes = LANES[active.length] || [];
+    scene.classList.remove("p0", "p1", "p2", "p3", "p4");
     document.querySelector(".app").classList.toggle("crowd", active.length >= 4);
     scene.classList.add("p" + active.length);
     if (drawnLanes !== active.length) {
@@ -937,17 +1062,20 @@ body {
           '<rect x="110" y="' + (y - 17) + '" width="770" height="34" rx="17" fill="#e9d7b0"/>';
       }).join("");
     }
-    KIDS.forEach(function (k) { kidEls[k.id].hidden = state.players.indexOf(k.id) === -1; });
+    state.kids.forEach(function (k) { kidEls[k.id].hidden = !!k.off; });
     active.forEach(function (k, li) {
       var yPct = lanes[li] / 360 * 100;
       var n = planFor(k.id).length, d = doneCount(k.id);
       for (var i = 1; i <= n; i++) {
-        html += '<span class="stone ' + k.id + (i <= d ? " done" : "") +
-          '" style="left:' + xFor(i, n) + "%;top:" + yPct + '%"></span>';
+        html += '<span class="stone' + (i <= d ? " done" : "") +
+          '" style="left:' + xFor(i, n) + "%;top:" + yPct + "%;" + colorVars(k) + '"></span>';
       }
       kidEls[k.id].style.top = yPct + "%";
       kidEls[k.id].style.left = xFor(d, n) + "%";
-      kidEls[k.id].querySelector(".tag").textContent = nm(k.id);
+      kidEls[k.id].querySelector(".tag").textContent = nm(k);
+      var c = accent(k);
+      kidEls[k.id].style.setProperty("--c", c);
+      kidEls[k.id].style.setProperty("--cs", mix(c, "#ffffff", 0.82));
       kidEls[k.id].classList.toggle("finished", isFinished(k.id));
     });
     stonesEl.innerHTML = html;
@@ -965,19 +1093,20 @@ body {
     boardsEl.className = "boards n" + players().length;
     players().forEach(function (k) {
       var board = document.createElement("section");
-      board.className = "board " + k.id;
+      board.className = "board";
+      board.style.cssText = colorVars(k);
       var plan = planFor(k.id);
-      board.innerHTML = '<header><h2>' + esc(nm(k.id)) + '</h2><span class="count">' +
+      board.innerHTML = '<header><h2>' + esc(nm(k)) + '</h2><span class="count">' +
         doneCount(k.id) + " av " + plan.length + "</span></header>";
       var grid = document.createElement("div");
       grid.className = "tasks" + (plan.length > 8 ? " many" : "");
       plan.forEach(function (t) {
-        var done = state.done[k.id].indexOf(t.id) !== -1;
+        var done = doneList(k.id).indexOf(t.id) !== -1;
         var b = document.createElement("button");
         b.type = "button";
         b.className = "task" + (done ? " done" : "");
         b.setAttribute("aria-pressed", done ? "true" : "false");
-        b.setAttribute("aria-label", nm(k.id) + ": " + t.label);
+        b.setAttribute("aria-label", nm(k) + ": " + t.label);
         b.innerHTML = '<span class="icon">' + esc(t.icon) + '</span><span class="label">' + esc(t.label) +
           '</span><span class="check">✓</span>';
         b.addEventListener("click", function () { toggle(k, t); });
@@ -1037,7 +1166,7 @@ body {
 
   // ---------- Konfetti ----------
   var cv = document.getElementById("confetti"), cx = cv.getContext("2d"), bits = [], raf = 0;
-  var COLORS = ["#ff7a45", "#3fb6a8", "#ffc93c", "#4d96ff", "#ff8fb1", "#9ad66b"];
+  var CONFETTI = ["#ff7a45", "#3fb6a8", "#ffc93c", "#4d96ff", "#ff8fb1", "#9ad66b"];
   function confetti(xPct, yPct, count) {
     if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio;
@@ -1045,7 +1174,7 @@ body {
     for (var i = 0; i < count; i++) {
       var a = Math.random() * Math.PI * 2, s = (4 + Math.random() * 10) * devicePixelRatio;
       bits.push({ x: ox, y: oy, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 8 * devicePixelRatio,
-        r: (4 + Math.random() * 6) * devicePixelRatio, c: COLORS[i % COLORS.length], life: 90 + Math.random() * 60,
+        r: (4 + Math.random() * 6) * devicePixelRatio, c: CONFETTI[i % CONFETTI.length], life: 90 + Math.random() * 60,
         rot: Math.random() * 6 });
     }
     if (!raf) raf = requestAnimationFrame(tick);
@@ -1070,7 +1199,7 @@ body {
   function toggle(k, t) {
     wakeLock();
     newMorningIfNeeded();
-    var list = state.done[k.id], i = list.indexOf(t.id);
+    var list = doneList(k.id), i = list.indexOf(t.id);
     var wasFinished = isFinished(k.id);
     if (i === -1) list.push(t.id); else list.splice(i, 1);
     save();
@@ -1104,14 +1233,14 @@ body {
           tones([523, 659, 784, 1047, 784, 1047, 1319], 0.14, "square");
         }, 1500);
       } else {
-        say(nm(k.id) + " är " + scenario().place + "!");
+        say(nm(k) + " är " + scenario().place + "!");
       }
     } else {
       tones([659, 880], 0.09);
       var pos = kidScreenPos(k.id);
       confetti(pos[0], pos[1], 24);
       var what = t.say || (t.label + " klart");
-      say(PRAISE[Math.floor(Math.random() * PRAISE.length)] + " " + nm(k.id) + "! " +
+      say(PRAISE[Math.floor(Math.random() * PRAISE.length)] + " " + nm(k) + "! " +
         what.charAt(0).toUpperCase() + what.slice(1) + ".");
     }
   }
@@ -1133,8 +1262,8 @@ body {
       return;
     }
     disarm();
-    state.done = emptyDone(); state.date = today(); save();
-    KIDS.forEach(function (k) { kidEls[k.id].classList.remove("cheer"); });
+    state.done = {}; state.date = today(); save();
+    Object.keys(kidEls).forEach(function (id) { kidEls[id].classList.remove("cheer"); });
     render();
     tones([392, 523, 659], 0.1);
   });
@@ -1150,24 +1279,24 @@ body {
   var settingsEl = document.getElementById("settings");
   var editing = null, chosenIcon = ICONS[0], deleteArmed = null, deleteTimer = 0;
   function renderPlayers() {
-    var focused = document.activeElement && document.activeElement.id;
     var html = "";
-    KIDS.forEach(function (k) {
-      var on = state.players.indexOf(k.id) !== -1;
-      html += '<div class="player ' + k.id + (on ? "" : " off") + '">' +
-        '<span class="avatar">' + kidSvg(k) + "</span>" +
+    state.kids.forEach(function (k) {
+      html += '<div class="player' + (k.off ? " off" : "") + '" style="' + colorVars(k) + '">' +
+        '<span class="avatar">' + kidSvg(k, "set-" + k.id) + "</span>" +
+        '<span class="pname">' + esc(nm(k)) + "</span>" +
         '<label class="on" for="on-' + k.id + '"><input type="checkbox" id="on-' + k.id + '" data-on="' + k.id + '"' +
-        (on ? " checked" : "") + "> Med</label>" +
-        '<label for="name-' + k.id + '"><span class="who">' + k.who + "</span>" +
-        '<input class="field" id="name-' + k.id + '" maxlength="16" autocomplete="off" data-name="' + k.id +
-        '" value="' + esc(state.names[k.id]) + '"></label></div>';
+        (k.off ? "" : " checked") + "> Med idag</label>" +
+        '<button class="mini" type="button" data-editkid="' + k.id + '">Ändra</button></div>';
     });
+    if (!state.kids.length) html = '<p class="hint">Inga barn ännu.</p>';
     document.getElementById("playerRows").innerHTML = html;
-    if (focused && document.getElementById(focused)) document.getElementById(focused).focus();
+    var add = document.getElementById("addKid");
+    add.disabled = state.kids.length >= MAX_KIDS;
+    add.textContent = state.kids.length >= MAX_KIDS ? "Max " + MAX_KIDS + " barn" : "＋ Lägg till barn";
   }
   function renderTaskTable() {
     document.getElementById("settingsHead").innerHTML = "<tr><th>Syssla</th>" + players().map(function (k) {
-      return '<th class="' + k.id + '">' + esc(nm(k.id)) + "</th>";
+      return '<th class="kidcol" style="' + colorVars(k) + '">' + esc(nm(k)) + "</th>";
     }).join("") + "</tr>";
     var rows = "";
     allTasks().forEach(function (t) {
@@ -1180,9 +1309,9 @@ body {
       }
       rows += "</div></td>";
       players().forEach(function (k) {
-        var on = state.plan[k.id].indexOf(t.id) !== -1;
+        var on = (state.plan[k.id] || []).indexOf(t.id) !== -1;
         rows += '<td><input type="checkbox" id="p-' + k.id + "-" + t.id + '" data-kid="' + k.id +
-          '" data-task="' + t.id + '"' + (on ? " checked" : "") + ' aria-label="' + esc(nm(k.id) + ": " + t.label) + '"></td>';
+          '" data-task="' + t.id + '"' + (on ? " checked" : "") + ' aria-label="' + esc(nm(k) + ": " + t.label) + '"></td>';
       });
       rows += "</tr>";
     });
@@ -1236,27 +1365,214 @@ body {
   document.getElementById("settingsBtn").addEventListener("click", function () {
     resetForm(); renderSettings(); settingsEl.hidden = false;
   });
-  document.getElementById("playerRows").addEventListener("input", function (e) {
-    var id = e.target.getAttribute("data-name");
-    if (!id) return;
-    state.names[id] = e.target.value; save(); render(); renderTaskTable();
-  });
   document.getElementById("playerRows").addEventListener("change", function (e) {
     var id = e.target.getAttribute("data-on");
     if (!id) return;
-    if (e.target.checked) {
-      state.players = KIDS.map(function (k) { return k.id; }).filter(function (kid) {
-        return kid === id || state.players.indexOf(kid) !== -1;
-      });
-    } else if (state.players.length > 1) {
-      state.players = state.players.filter(function (kid) { return kid !== id; });
-    } else {
-      e.target.checked = true; // minst en spelare måste vara med
-      return;
-    }
+    var k = state.kids.filter(function (x) { return x.id === id; })[0];
+    if (!e.target.checked && players().length <= 1) { e.target.checked = true; return; } // minst ett barn måste vara med
+    k.off = !e.target.checked;
     save(); render(); renderPlayers(); renderTaskTable();
     tones([523, 659], 0.08);
   });
+  document.getElementById("playerRows").addEventListener("click", function (e) {
+    var btn = e.target.closest("button[data-editkid]");
+    if (btn) openBuilder(btn.getAttribute("data-editkid"));
+  });
+  document.getElementById("addKid").addEventListener("click", function () { openBuilder(null); });
+
+  // ---------- Figurbyggare ----------
+  var builderEl = document.getElementById("builder"), draft = null, draftIsNew = false, kidDeleteArmed = 0;
+  function openBuilder(id) {
+    var existing = id && state.kids.filter(function (k) { return k.id === id; })[0];
+    draftIsNew = !existing;
+    if (draftIsNew && state.kids.length >= MAX_KIDS) return;
+    draft = existing ? Object.assign({}, existing) : newKid();
+    if (draftIsNew) {
+      // Variera standardfärgen så att syskon inte blir likadana
+      draft.topColor = COLORS[(state.kids.length * 3) % 8];
+    }
+    document.getElementById("builderTitle").textContent = draftIsNew ? "Nytt barn" : "Ändra " + nm(existing);
+    document.getElementById("bName").value = draft.name;
+    document.getElementById("bDelete").hidden = draftIsNew;
+    document.getElementById("builderError").hidden = true;
+    disarmKidDelete();
+    renderBuilder();
+    builderEl.hidden = false;
+    if (draftIsNew) setTimeout(function () { document.getElementById("bName").focus(); }, 50);
+  }
+  function renderBuilder() {
+    var prev = document.getElementById("builderPreview");
+    prev.className = "preview" + (draft.size === "small" ? " small" : "");
+    prev.innerHTML = kidSvg(draft, "preview");
+    var html = "";
+    OPTIONS.forEach(function (o) {
+      if (o.when && !o.when(draft)) return;
+      html += '<div><p class="opt-label">' + o.label + "</p>";
+      if (o.chips) {
+        html += '<div class="chips">' + o.chips.map(function (c) {
+          return '<button type="button" data-k="' + o.key + '" data-v="' + c[0] + '" aria-pressed="' + (draft[o.key] === c[0]) + '">' + c[1] + "</button>";
+        }).join("") + "</div>";
+      } else {
+        html += '<div class="swatches">' + o.swatches.map(function (c, i) {
+          return '<button type="button" data-k="' + o.key + '" data-v="' + c + '" aria-pressed="' + (draft[o.key] === c) +
+            '" aria-label="' + o.label + " " + (i + 1) + '" style="background:' + c + '"></button>';
+        }).join("") + "</div>";
+      }
+      html += "</div>";
+    });
+    document.getElementById("builderOpts").innerHTML = html;
+  }
+  document.getElementById("builderOpts").addEventListener("click", function (e) {
+    var btn = e.target.closest("button[data-k]");
+    if (!btn) return;
+    draft[btn.getAttribute("data-k")] = btn.getAttribute("data-v");
+    renderBuilder();
+  });
+  document.getElementById("bName").addEventListener("input", function (e) { draft.name = e.target.value; });
+  function closeBuilder() {
+    builderEl.hidden = true;
+    if (!state.kids.length) showWelcome();
+  }
+  document.getElementById("bCancel").addEventListener("click", closeBuilder);
+  document.getElementById("bSave").addEventListener("click", function () {
+    draft.name = document.getElementById("bName").value.trim();
+    if (!draft.name) {
+      var err = document.getElementById("builderError");
+      err.textContent = "Skriv barnets namn först."; err.hidden = false;
+      document.getElementById("bName").focus();
+      return;
+    }
+    if (draftIsNew) {
+      state.kids.push(draft);
+      state.plan[draft.id] = allTaskIds();
+      state.done[draft.id] = [];
+    } else {
+      state.kids = state.kids.map(function (k) { return k.id === draft.id ? draft : k; });
+    }
+    save(); rebuildKids(); render(); renderPlayers(); renderTaskTable();
+    builderEl.hidden = true;
+    tones([523, 659, 784], 0.09);
+  });
+  function disarmKidDelete() {
+    clearTimeout(kidDeleteArmed); kidDeleteArmed = 0;
+    var b = document.getElementById("bDelete");
+    b.textContent = "Ta bort barnet"; b.classList.remove("warn");
+  }
+  document.getElementById("bDelete").addEventListener("click", function () {
+    var b = document.getElementById("bDelete");
+    if (!kidDeleteArmed) {
+      b.textContent = "Tryck igen för att ta bort"; b.classList.add("warn");
+      kidDeleteArmed = setTimeout(disarmKidDelete, 3500);
+      return;
+    }
+    disarmKidDelete();
+    var id = draft.id;
+    state.kids = state.kids.filter(function (k) { return k.id !== id; });
+    delete state.plan[id]; delete state.done[id];
+    if (state.kids.length && !players().length) state.kids[0].off = false;
+    save(); rebuildKids(); render(); renderPlayers(); renderTaskTable();
+    closeBuilder();
+  });
+
+  // ---------- Välkomst ----------
+  function showWelcome() {
+    var demo = [
+      Object.assign(newKid(), { topColor: "#ff7a45", hat: "cap", hatColor: "#3fa34d" }),
+      Object.assign(newKid(), { size: "small", hairStyle: "pigtails", hair: "#6b4226", skin: "#c68a5e", topColor: "#ff8fb1", pants: "#7b5ea7" }),
+      Object.assign(newKid(), { hair: "#2a1c17", skin: "#8d5a3b", top: "stripes", topColor: "#ffffff", stripeColor: "#2e6fbf", hat: "beanie", hatColor: "#ffc93c" })
+    ];
+    document.getElementById("welcomeKids").innerHTML = demo.map(function (k, i) { return kidSvg(k, "w" + i); }).join("");
+    document.getElementById("welcome").hidden = false;
+  }
+  document.getElementById("welcomeStart").addEventListener("click", function () {
+    document.getElementById("welcome").hidden = true;
+    openBuilder(null);
+  });
+
+  // ---------- Dela familjen ----------
+  function b64enc(str) {
+    return btoa(unescape(encodeURIComponent(str))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+  function b64dec(str) {
+    str = str.replace(/-/g, "+").replace(/_/g, "/");
+    while (str.length % 4) str += "=";
+    return decodeURIComponent(escape(atob(str)));
+  }
+  var FIELDS = { n: "name", s: "size", sk: "skin", hs: "hairStyle", h: "hair", t: "top", tc: "topColor", sc: "stripeColor",
+    p: "pants", hw: "hat", hc: "hatColor", sh: "shoes" };
+  function exportFamily() {
+    return {
+      v: 1,
+      k: state.kids.map(function (k) {
+        var o = {};
+        Object.keys(FIELDS).forEach(function (f) { o[f] = k[FIELDS[f]]; });
+        o.pl = state.plan[k.id] || [];
+        return o;
+      }),
+      c: state.custom,
+      sc: state.scenario
+    };
+  }
+  function importFamily(data) {
+    var custom = Array.isArray(data.c) ? data.c.filter(function (c) { return c && c.id && c.label; }).map(function (c) {
+      return { id: String(c.id), icon: String(c.icon || "⭐"), label: String(c.label).slice(0, 20) };
+    }) : [];
+    state.custom = custom;
+    var valid = allTaskIds();
+    state.kids = []; state.plan = {}; state.done = {};
+    (data.k || []).slice(0, MAX_KIDS).forEach(function (o) {
+      var k = newKid();
+      Object.keys(FIELDS).forEach(function (f) { if (typeof o[f] === "string") k[FIELDS[f]] = o[f]; });
+      k.name = k.name.slice(0, 16);
+      if (!/^#[0-9a-f]{6}$/i.test(k.skin)) k.skin = SKINS[1];
+      state.kids.push(k);
+      state.plan[k.id] = Array.isArray(o.pl) ? o.pl.filter(function (id) { return valid.indexOf(id) !== -1; }) : valid.slice();
+      state.done[k.id] = [];
+    });
+    if (data.sc && SCENARIOS.some(function (x) { return x.id === data.sc; })) state.scenario = data.sc;
+    save(); rebuildKids(); showDate(); render();
+  }
+  document.getElementById("shareMake").addEventListener("click", function () {
+    var msg = document.getElementById("shareMsg");
+    if (!state.kids.length) { msg.textContent = "Skapa minst ett barn först."; msg.hidden = false; return; }
+    var url = location.href.split("#")[0] + "#familj=" + b64enc(JSON.stringify(exportFamily()));
+    document.getElementById("shareLink").value = url;
+    document.getElementById("shareOut").hidden = false;
+    msg.textContent = "Skicka länken till den andra familjen. När de öppnar den får de " + joinNames(state.kids) + ".";
+    msg.hidden = false;
+  });
+  document.getElementById("shareCopy").addEventListener("click", function () {
+    var inp = document.getElementById("shareLink"), btn = this;
+    function done() { btn.textContent = "Kopierad!"; setTimeout(function () { btn.textContent = "Kopiera"; }, 2000); }
+    try {
+      navigator.clipboard.writeText(inp.value).then(done, function () { inp.select(); });
+    } catch (e) { inp.select(); }
+  });
+
+  var pendingImport = null;
+  function checkImport() {
+    var m = location.hash.match(/^#familj=([A-Za-z0-9_-]+)/);
+    if (!m) return false;
+    try { pendingImport = JSON.parse(b64dec(m[1])); } catch (e) { pendingImport = null; }
+    try { history.replaceState(null, "", location.href.split("#")[0]); } catch (e) {}
+    if (!pendingImport || !Array.isArray(pendingImport.k) || !pendingImport.k.length) return false;
+    var names = pendingImport.k.map(function (o) { return o.n || "Barnet"; });
+    var list = names.length < 2 ? names[0] : names.slice(0, -1).join(", ") + " och " + names[names.length - 1];
+    if (!state.kids.length) { importFamily(pendingImport); return true; }
+    document.getElementById("importText").textContent = "Länken innehåller " + list +
+      ". Vill du byta ut barnen och sysslorna på den här enheten?";
+    document.getElementById("importBox").hidden = false;
+    return true;
+  }
+  document.getElementById("importYes").addEventListener("click", function () {
+    document.getElementById("importBox").hidden = true;
+    if (pendingImport) importFamily(pendingImport);
+  });
+  document.getElementById("importNo").addEventListener("click", function () {
+    document.getElementById("importBox").hidden = true;
+  });
+  window.addEventListener("hashchange", checkImport);
+
   document.getElementById("settingsRows").addEventListener("change", function (e) {
     var cb = e.target, kid = cb.getAttribute("data-kid"), id = cb.getAttribute("data-task");
     if (!kid) return;
@@ -1291,9 +1607,9 @@ body {
       }
       clearTimeout(deleteTimer); deleteArmed = null;
       state.custom = state.custom.filter(function (c) { return c.id !== delId; });
-      KIDS.forEach(function (k) {
-        state.plan[k.id] = state.plan[k.id].filter(function (id) { return id !== delId; });
-        state.done[k.id] = state.done[k.id].filter(function (id) { return id !== delId; });
+      state.kids.forEach(function (k) {
+        state.plan[k.id] = (state.plan[k.id] || []).filter(function (id) { return id !== delId; });
+        state.done[k.id] = doneList(k.id).filter(function (id) { return id !== delId; });
       });
       if (editing === delId) resetForm();
       save(); render(); renderSettings();
@@ -1328,7 +1644,7 @@ body {
     } else {
       var id = "c" + Date.now().toString(36);
       state.custom.push({ id: id, icon: chosenIcon, label: label });
-      KIDS.forEach(function (k) { state.plan[k.id].push(id); });
+      state.kids.forEach(function (k) { (state.plan[k.id] = state.plan[k.id] || []).push(id); });
     }
     save(); render(); resetForm(); renderSettings();
     tones([659, 880], 0.08);
@@ -1351,6 +1667,7 @@ body {
   });
 
   showDate(); showSound(); render();
+  if (!checkImport() && !state.kids.length) showWelcome();
   setInterval(function () { if (state.date !== today()) { newMorningIfNeeded(); showDate(); render(); } }, 60000);
 })();
 </script>
